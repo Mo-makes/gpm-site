@@ -31,7 +31,14 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env.local
+.env.production.local
+
+# Claude Code local settings
+.claude/
+
+# Confidential brand materials
+GPM_Brand_Guidelines.pdf
 
 # vercel
 .vercel
