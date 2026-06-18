@@ -4,8 +4,9 @@ interface ContactPayload {
   firstName: string;
   lastName: string;
   phone: string;
-  email: string;
+  email?: string;
   isNewPatient: "yes" | "no";
+  insurance?: string;
   address1?: string;
   address2?: string;
   city?: string;
@@ -21,12 +22,11 @@ function isValidPayload(data: unknown): data is ContactPayload {
     typeof d.firstName === "string" &&
     typeof d.lastName === "string" &&
     typeof d.phone === "string" &&
-    typeof d.email === "string" &&
+    (d.email === undefined || d.email === "" || (typeof d.email === "string" && d.email.includes("@"))) &&
     (d.isNewPatient === "yes" || d.isNewPatient === "no") &&
     typeof d.message === "string" &&
     d.firstName.trim().length > 0 &&
     d.lastName.trim().length > 0 &&
-    d.email.includes("@") &&
     d.message.trim().length >= 10
   );
 }
@@ -67,8 +67,9 @@ export async function POST(request: NextRequest) {
     <table cellpadding="6" style="font-family: sans-serif; font-size: 14px; border-collapse: collapse;">
       <tr><td><strong>Name</strong></td><td>${body.firstName} ${body.lastName}</td></tr>
       <tr><td><strong>Phone</strong></td><td>${body.phone}</td></tr>
-      <tr><td><strong>Email</strong></td><td>${body.email}</td></tr>
+      ${body.email ? `<tr><td><strong>Email</strong></td><td>${body.email}</td></tr>` : ""}
       <tr><td><strong>Patient Type</strong></td><td>${patientType}</td></tr>
+      ${body.insurance ? `<tr><td><strong>Insurance</strong></td><td>${body.insurance}</td></tr>` : ""}
       ${body.address1 ? `<tr><td><strong>Address</strong></td><td>${[body.address1, body.address2, body.city, body.state, body.zip].filter(Boolean).join(", ")}</td></tr>` : ""}
       <tr><td><strong>Message</strong></td><td style="white-space: pre-wrap;">${body.message}</td></tr>
     </table>
@@ -88,7 +89,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         from: "Global Pain Management Website <formsubmissions@gascmd.com>",
         to: [contactEmail],
-        reply_to: body.email,
+        ...(body.email ? { reply_to: body.email } : {}),
         subject: `New ${patientType} Inquiry — ${body.firstName} ${body.lastName}`,
         html: emailHtml,
       }),

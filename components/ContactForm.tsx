@@ -9,6 +9,7 @@ interface FormData {
   phone: string;
   email: string;
   isNewPatient: "yes" | "no";
+  insurance?: string;
   address1?: string;
   address2?: string;
   city?: string;
@@ -24,8 +25,13 @@ export default function ContactForm() {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<FormData>();
+
+  const isNewPatient = watch("isNewPatient");
+  const insuranceValue = watch("insurance");
+  const isUHC = /uhc|united\s*health/i.test(insuranceValue ?? "");
 
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
@@ -136,8 +142,8 @@ export default function ContactForm() {
             {...register("phone", {
               required: "Phone number is required",
               pattern: {
-                value: /^[\d\s\-().+]{7,}$/,
-                message: "Enter a valid phone number",
+                value: /^\(?\d{3}\)?[\s.\-]?\d{3}[\s.\-]?\d{4}$/,
+                message: "Enter a 10-digit US phone number, e.g. (410) 825-4050",
               },
             })}
           />
@@ -151,17 +157,15 @@ export default function ContactForm() {
         {/* Email */}
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email Address <span className="text-red-500" aria-hidden="true">*</span>
+            Email Address <span className="text-text-muted font-normal">(optional)</span>
           </label>
           <input
             id="email"
             type="email"
             autoComplete="email"
             className={inputClass}
-            aria-required="true"
             aria-describedby={errors.email ? "email-error" : undefined}
             {...register("email", {
-              required: "Email is required",
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "Enter a valid email address",
@@ -205,6 +209,28 @@ export default function ContactForm() {
           )}
         </fieldset>
       </div>
+
+      {/* Insurance — new patients only */}
+      {isNewPatient === "yes" && (
+        <div className="mt-5">
+          <label htmlFor="insurance" className={labelClass}>
+            Primary Insurance Provider <span className="text-text-muted font-normal">(optional)</span>
+          </label>
+          <input
+            id="insurance"
+            type="text"
+            autoComplete="off"
+            placeholder="e.g. Blue Cross Blue Shield, Medicare, Aetna"
+            className={inputClass}
+            {...register("insurance")}
+          />
+          {isUHC && (
+            <div className="mt-2 bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800" role="alert">
+              <strong>Referral required:</strong> United Healthcare patients must have a referral from their primary care provider faxed to Global Pain Management before their first appointment. Please ask your PCP to fax the referral to us at <strong>(410) 825-4051</strong>.
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Address */}
       <div className="mt-5">
