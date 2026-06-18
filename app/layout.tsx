@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
-import { Montserrat, Jost } from "next/font/google";
+import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+// Fraunces — a high-contrast "old-style" display serif with academic warmth.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const jost = Jost({
-  variable: "--font-jost",
+// Hanken Grotesk — a clean, warm humanist sans for body and UI.
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -54,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${jost.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${hanken.variable}`}>
       <body className="min-h-screen flex flex-col">
         <a href="#main-content" className="skip-link">
           Skip to main content

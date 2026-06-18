@@ -33,7 +33,7 @@ export default function TestimonialCarousel({
 
   useEffect(() => {
     if (isPaused) return;
-    const interval = setInterval(next, 5000);
+    const interval = setInterval(next, 6000);
     return () => clearInterval(interval);
   }, [isPaused, next]);
 
@@ -43,11 +43,14 @@ export default function TestimonialCarousel({
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Cards */}
       <div className="overflow-hidden">
         <div
-          className="flex transition-transform duration-500 ease-in-out gap-6"
-          style={{ transform: `translateX(calc(-${currentIndex * (100 / visibleCount)}% - ${currentIndex * 24 / visibleCount}px))` }}
+          className="flex transition-transform duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] gap-6"
+          style={{
+            transform: `translateX(calc(-${currentIndex * (100 / visibleCount)}% - ${
+              (currentIndex * 24) / visibleCount
+            }px))`,
+          }}
           aria-live="polite"
           aria-atomic="true"
         >
@@ -64,15 +67,15 @@ export default function TestimonialCarousel({
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-4 mt-8">
+      <div className="flex items-center justify-center gap-5 mt-10">
         <button
           onClick={prev}
-          className="w-10 h-10 rounded-full border-2 border-brand-blue text-brand-blue flex items-center justify-center hover:bg-brand-blue hover:text-white transition-colors"
+          className="w-11 h-11 rounded-full border border-line-strong text-navy flex items-center justify-center hover:bg-navy hover:text-paper hover:border-navy transition-colors text-lg"
           aria-label="Previous testimonial"
         >
           ‹
         </button>
-        <div className="flex gap-2" role="tablist" aria-label="Testimonial pagination">
+        <div className="flex gap-2.5" role="tablist" aria-label="Testimonial pagination">
           {Array.from({ length: maxIndex + 1 }).map((_, i) => (
             <button
               key={i}
@@ -80,15 +83,15 @@ export default function TestimonialCarousel({
               aria-selected={i === currentIndex}
               aria-label={`Go to testimonial ${i + 1}`}
               onClick={() => setCurrentIndex(i)}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                i === currentIndex ? "bg-brand-blue" : "bg-gray-300"
+              className={`h-2 rounded-full transition-all ${
+                i === currentIndex ? "w-6 bg-clay" : "w-2 bg-line-strong"
               }`}
             />
           ))}
         </div>
         <button
           onClick={next}
-          className="w-10 h-10 rounded-full border-2 border-brand-blue text-brand-blue flex items-center justify-center hover:bg-brand-blue hover:text-white transition-colors"
+          className="w-11 h-11 rounded-full border border-line-strong text-navy flex items-center justify-center hover:bg-navy hover:text-paper hover:border-navy transition-colors text-lg"
           aria-label="Next testimonial"
         >
           ›

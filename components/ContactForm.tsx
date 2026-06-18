@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { PHONE_DISPLAY, PHONE_HREF, FAX_DISPLAY } from "@/lib/site";
 
 interface FormData {
   firstName: string;
@@ -19,7 +20,9 @@ interface FormData {
 }
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
 
   const {
     register,
@@ -49,28 +52,46 @@ export default function ContactForm() {
     }
   };
 
-  const inputClass =
-    "w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 transition-colors";
-  const labelClass = "block text-sm font-medium text-text-primary mb-1";
-  const errorClass = "text-red-600 text-xs mt-1";
+  const labelClass =
+    "block text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-sage-deep mb-2";
+  const errorClass = "text-clay-deep text-xs mt-1.5";
 
   if (status === "success") {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
-        <div className="text-4xl mb-3" aria-hidden="true">✓</div>
-        <h3 className="text-lg font-bold text-green-800 mb-2">Message Sent!</h3>
-        <p className="text-green-700 text-sm">
-          Thank you for reaching out. A member of our team will be in touch
-          within one business day. For urgent matters, please call us directly
-          at{" "}
-          <a href="tel:4438254050" className="font-semibold underline">
-            (443) 825-4050
+      <div className="card p-8 text-center border-sage/40">
+        <div
+          className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-sage-soft"
+          aria-hidden="true"
+        >
+          <svg
+            className="h-7 w-7 text-sage-deep"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3
+          className="font-fraunces text-xl text-ink mb-2"
+          style={{ fontWeight: 560 }}
+        >
+          Message sent
+        </h3>
+        <p className="text-body text-[0.95rem] leading-relaxed max-w-md mx-auto">
+          Thank you for reaching out. A member of our team will be in touch within one
+          business day. For urgent matters, please call us directly at{" "}
+          <a href={PHONE_HREF} className="font-semibold text-clay-deep underline">
+            {PHONE_DISPLAY}
           </a>
           .
         </p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-4 text-sm text-green-700 underline hover:no-underline"
+          className="mt-5 text-sm text-clay-deep underline hover:no-underline"
         >
           Send another message
         </button>
@@ -88,13 +109,13 @@ export default function ContactForm() {
         {/* First Name */}
         <div>
           <label htmlFor="firstName" className={labelClass}>
-            First Name <span className="text-red-500" aria-hidden="true">*</span>
+            First name <span className="text-clay" aria-hidden="true">*</span>
           </label>
           <input
             id="firstName"
             type="text"
             autoComplete="given-name"
-            className={inputClass}
+            className="field"
             aria-required="true"
             aria-describedby={errors.firstName ? "firstName-error" : undefined}
             {...register("firstName", { required: "First name is required" })}
@@ -109,13 +130,13 @@ export default function ContactForm() {
         {/* Last Name */}
         <div>
           <label htmlFor="lastName" className={labelClass}>
-            Last Name <span className="text-red-500" aria-hidden="true">*</span>
+            Last name <span className="text-clay" aria-hidden="true">*</span>
           </label>
           <input
             id="lastName"
             type="text"
             autoComplete="family-name"
-            className={inputClass}
+            className="field"
             aria-required="true"
             aria-describedby={errors.lastName ? "lastName-error" : undefined}
             {...register("lastName", { required: "Last name is required" })}
@@ -130,13 +151,13 @@ export default function ContactForm() {
         {/* Phone */}
         <div>
           <label htmlFor="phone" className={labelClass}>
-            Phone Number <span className="text-red-500" aria-hidden="true">*</span>
+            Phone number <span className="text-clay" aria-hidden="true">*</span>
           </label>
           <input
             id="phone"
             type="tel"
             autoComplete="tel"
-            className={inputClass}
+            className="field"
             aria-required="true"
             aria-describedby={errors.phone ? "phone-error" : undefined}
             {...register("phone", {
@@ -157,13 +178,13 @@ export default function ContactForm() {
         {/* Email */}
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email Address <span className="text-text-muted font-normal">(optional)</span>
+            Email <span className="text-muted font-normal normal-case tracking-normal">(optional)</span>
           </label>
           <input
             id="email"
             type="email"
             autoComplete="email"
-            className={inputClass}
+            className="field"
             aria-describedby={errors.email ? "email-error" : undefined}
             {...register("email", {
               pattern: {
@@ -181,26 +202,40 @@ export default function ContactForm() {
       </div>
 
       {/* New Patient */}
-      <div className="mt-5">
+      <div className="mt-6">
         <fieldset>
           <legend className={labelClass}>
             Are you a new patient?{" "}
-            <span className="text-red-500" aria-hidden="true">*</span>
+            <span className="text-clay" aria-hidden="true">*</span>
           </legend>
-          <div className="flex gap-6 mt-2">
-            {(["yes", "no"] as const).map((val) => (
-              <label key={val} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  value={val}
-                  className="w-4 h-4 text-brand-blue border-gray-300 focus:ring-brand-blue"
-                  {...register("isNewPatient", {
-                    required: "Please select one",
-                  })}
-                />
-                <span className="text-sm text-text-primary capitalize">{val === "yes" ? "Yes, new patient" : "No, existing patient"}</span>
-              </label>
-            ))}
+          <div className="flex flex-wrap gap-3 mt-1">
+            {(["yes", "no"] as const).map((val) => {
+              const selected = isNewPatient === val;
+              return (
+                <label
+                  key={val}
+                  className={`flex items-center gap-2.5 cursor-pointer rounded-[3px] border px-4 py-2.5 text-[0.9rem] transition-colors ${
+                    selected
+                      ? "border-clay bg-clay-soft text-clay-deep"
+                      : "border-line-strong text-body hover:border-clay/50"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={val}
+                    className="sr-only"
+                    {...register("isNewPatient", { required: "Please select one" })}
+                  />
+                  <span
+                    aria-hidden="true"
+                    className={`h-3.5 w-3.5 rounded-full border ${
+                      selected ? "border-clay bg-clay" : "border-line-strong"
+                    }`}
+                  />
+                  {val === "yes" ? "Yes, I'm new" : "No, established patient"}
+                </label>
+              );
+            })}
           </div>
           {errors.isNewPatient && (
             <p className={errorClass} role="alert">
@@ -212,36 +247,46 @@ export default function ContactForm() {
 
       {/* Insurance — new patients only */}
       {isNewPatient === "yes" && (
-        <div className="mt-5">
+        <div className="mt-6">
           <label htmlFor="insurance" className={labelClass}>
-            Primary Insurance Provider <span className="text-text-muted font-normal">(optional)</span>
+            Primary insurance{" "}
+            <span className="text-muted font-normal normal-case tracking-normal">(optional)</span>
           </label>
           <input
             id="insurance"
             type="text"
             autoComplete="off"
             placeholder="e.g. Blue Cross Blue Shield, Medicare, Aetna"
-            className={inputClass}
+            className="field"
             {...register("insurance")}
           />
           {isUHC && (
-            <div className="mt-2 bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800" role="alert">
-              <strong>Referral required:</strong> United Healthcare patients must have a referral from their primary care provider faxed to Global Pain Management before their first appointment. Please ask your PCP to fax the referral to us at <strong>(410) 825-4051</strong>.
+            <div
+              className="mt-3 bg-clay-soft border border-clay/30 rounded-[4px] p-4 text-[0.88rem] text-clay-deep leading-relaxed"
+              role="alert"
+            >
+              <strong>Referral required:</strong> United Healthcare patients must have a
+              referral from their primary care provider faxed to Global Pain Management
+              before their first appointment. Please ask your PCP to fax the referral to
+              us at <strong>{FAX_DISPLAY}</strong>.
             </div>
           )}
         </div>
       )}
 
       {/* Address */}
-      <div className="mt-5">
-        <p className={labelClass}>Address <span className="text-text-muted font-normal">(optional)</span></p>
+      <div className="mt-6">
+        <p className={labelClass}>
+          Address{" "}
+          <span className="text-muted font-normal normal-case tracking-normal">(optional)</span>
+        </p>
         <div className="grid grid-cols-1 gap-4 mt-1">
           <input
             id="address1"
             type="text"
             autoComplete="address-line1"
             placeholder="Street address"
-            className={inputClass}
+            className="field"
             {...register("address1")}
           />
           <input
@@ -249,7 +294,7 @@ export default function ContactForm() {
             type="text"
             autoComplete="address-line2"
             placeholder="Apt, suite, unit, etc."
-            className={inputClass}
+            className="field"
             {...register("address2")}
           />
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -258,7 +303,7 @@ export default function ContactForm() {
               type="text"
               autoComplete="address-level2"
               placeholder="City"
-              className={`${inputClass} sm:col-span-1`}
+              className="field"
               {...register("city")}
             />
             <input
@@ -266,7 +311,7 @@ export default function ContactForm() {
               type="text"
               autoComplete="address-level1"
               placeholder="State"
-              className={inputClass}
+              className="field"
               {...register("state")}
             />
             <input
@@ -274,7 +319,7 @@ export default function ContactForm() {
               type="text"
               autoComplete="postal-code"
               placeholder="ZIP code"
-              className={`${inputClass} col-span-2 sm:col-span-1`}
+              className="field col-span-2 sm:col-span-1"
               {...register("zip")}
             />
           </div>
@@ -282,17 +327,16 @@ export default function ContactForm() {
       </div>
 
       {/* Message */}
-      <div className="mt-5">
+      <div className="mt-6">
         <label htmlFor="message" className={labelClass}>
-          How can we help you?{" "}
-          <span className="text-red-500" aria-hidden="true">*</span>
+          How can we help? <span className="text-clay" aria-hidden="true">*</span>
         </label>
         <textarea
           id="message"
           rows={4}
-          className={`${inputClass} resize-none`}
+          className="field resize-none"
           aria-required="true"
-          placeholder="Briefly describe your pain condition or questions..."
+          placeholder="Briefly describe your pain condition or questions…"
           aria-describedby={errors.message ? "message-error" : undefined}
           {...register("message", {
             required: "Please tell us how we can help",
@@ -306,16 +350,15 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* HIPAA Notice */}
-      <div className="mt-5 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-        <p className="text-xs text-yellow-800 leading-relaxed">
-          <strong>Privacy Notice:</strong> Do not submit protected health
-          information (PHI) through this form. This is a general inquiry form
-          only — it is not a secure patient communication channel. For medical
-          questions about your specific condition or treatment, please call our
-          office directly at{" "}
-          <a href="tel:4438254050" className="font-semibold underline">
-            (443) 825-4050
+      {/* Privacy notice */}
+      <div className="mt-6 bg-sand border border-line-strong rounded-[4px] p-4">
+        <p className="text-[0.8rem] text-muted leading-relaxed">
+          <strong className="text-body">Privacy notice —</strong> please do not submit
+          protected health information (PHI) through this form. It is a general inquiry
+          form, not a secure patient channel. For medical questions about your specific
+          condition or treatment, call our office at{" "}
+          <a href={PHONE_HREF} className="font-semibold text-clay-deep underline">
+            {PHONE_DISPLAY}
           </a>
           .
         </p>
@@ -323,20 +366,20 @@ export default function ContactForm() {
 
       {status === "error" && (
         <div
-          className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm"
+          className="mt-5 bg-clay-soft border border-clay/30 rounded-[4px] p-4 text-clay-deep text-[0.9rem]"
           role="alert"
         >
-          Something went wrong. Please try again or call us at (443) 825-4050.
+          Something went wrong. Please try again or call us at {PHONE_DISPLAY}.
         </div>
       )}
 
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-6 w-full bg-brand-blue text-white py-3 rounded-lg font-semibold text-base hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="btn btn-clay w-full mt-7 py-3.5 disabled:opacity-60 disabled:cursor-not-allowed"
         aria-busy={status === "submitting"}
       >
-        {status === "submitting" ? "Sending…" : "Send Message"}
+        {status === "submitting" ? "Sending…" : "Send message"}
       </button>
     </form>
   );

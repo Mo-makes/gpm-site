@@ -15,35 +15,35 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="space-y-3">
+    <div className="border-t border-line">
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
         const headingId = `faq-heading-${index}`;
         const panelId = `faq-panel-${index}`;
 
         return (
-          <div
-            key={index}
-            className="border border-gray-200 rounded-xl overflow-hidden"
-          >
+          <div key={index} className="border-b border-line">
             <h3>
               <button
                 id={headingId}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="w-full flex items-center justify-between px-5 py-4 text-left bg-white hover:bg-brand-blue-light transition-colors"
+                className="w-full flex items-start justify-between gap-5 py-5 text-left"
               >
-                <span className="font-semibold text-brand-navy text-sm pr-4">
+                <span
+                  className="font-fraunces text-[1.12rem] text-ink leading-snug"
+                  style={{ fontWeight: 560 }}
+                >
                   {faq.question}
                 </span>
                 <span
-                  className={`flex-shrink-0 text-brand-blue transition-transform duration-200 ${
-                    isOpen ? "rotate-180" : "rotate-0"
+                  className={`shrink-0 mt-0.5 text-clay text-2xl leading-none transition-transform duration-300 ${
+                    isOpen ? "rotate-45" : "rotate-0"
                   }`}
                   aria-hidden="true"
                 >
-                  ▼
+                  +
                 </span>
               </button>
             </h3>
@@ -52,7 +52,7 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
               role="region"
               aria-labelledby={headingId}
               hidden={!isOpen}
-              className="px-5 py-4 bg-white border-t border-gray-100 text-sm text-text-muted leading-relaxed"
+              className="pb-6 -mt-1 text-[0.95rem] text-body leading-relaxed max-w-2xl"
             >
               {faq.answer}
             </div>

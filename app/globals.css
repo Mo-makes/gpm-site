@@ -1,231 +1,390 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   GLOBAL PAIN MANAGEMENT — "Tidewater"
+   A warm, editorial identity anchored by the brand navy (#0F1F3D).
+   Limestone paper · estuary sage · clay accent · navy ink.
+   ========================================================================== */
+
 @theme {
-  /* Brand colors */
-  --color-brand-navy: #0F1F3D;
-  --color-brand-slate: #1E2E4A;
-  --color-brand-cream: #F8F7F4;
-  --color-brand-blue: #2A6EBB;
-  --color-brand-blue-light: #E8F0FB;
-  --color-brand-teal: #1A8A7A;
-  --color-text-primary: #111827;
-  --color-text-muted: #6B7280;
+  /* ── Brand anchor: navy from the logo ─────────────────────────── */
+  --color-navy: #0f1f3d;
+  --color-navy-soft: #1c2c4a;
+  --color-navy-deep: #0a1629;
+  --color-ink: #15213d; /* headings on paper */
 
-  /* Fonts */
-  --font-montserrat: var(--font-montserrat);
-  --font-jost: var(--font-jost);
+  /* ── Warm limestone surfaces ──────────────────────────────────── */
+  --color-paper: #f4eee2; /* primary page background */
+  --color-paper-raised: #fbf7ee; /* cards, lifted surfaces */
+  --color-sand: #eae1cf; /* deeper alt sections / wells */
+
+  /* ── Text ─────────────────────────────────────────────────────── */
+  --color-body: #423d33; /* warm body text on paper */
+  --color-muted: #756d5d; /* secondary / captions */
+
+  /* ── Accents ──────────────────────────────────────────────────── */
+  --color-clay: #b15a32; /* primary warm accent / CTA */
+  --color-clay-deep: #934625; /* hover, links needing contrast */
+  --color-clay-soft: #f0ddcd; /* clay tint fill */
+  --color-sage: #6c7a59; /* estuary sage */
+  --color-sage-deep: #515d42; /* sage text */
+  --color-sage-soft: #e2e6d6; /* sage tint fill */
+  --color-brass: #a9802f; /* fine metallic detail */
+
+  /* ── Lines ────────────────────────────────────────────────────── */
+  --color-line: #d8cdb8; /* hairline on paper */
+  --color-line-strong: #c4b79c;
+
+  /* ── Legacy aliases (safety net for any un-migrated utility) ───── */
+  --color-brand-navy: #0f1f3d;
+  --color-brand-slate: #1c2c4a;
+  --color-brand-cream: #f4eee2;
+  --color-brand-blue: #b15a32;
+  --color-brand-blue-light: #f0ddcd;
+  --color-brand-teal: #6c7a59;
+  --color-text-primary: #15213d;
+  --color-text-muted: #756d5d;
+
+  /* ── Fonts ────────────────────────────────────────────────────── */
+  --font-fraunces: var(--font-fraunces);
+  --font-hanken: var(--font-hanken);
+
+  /* ── Radius (crisp, editorial — not bubbly) ───────────────────── */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 5px;
 }
 
-/* Focus ring for accessibility */
-:focus-visible {
-  outline: 2px solid #2A6EBB;
-  outline-offset: 2px;
+/* ── Base ───────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-hanken), system-ui, sans-serif;
+    color: var(--color-body);
+    background-color: var(--color-paper);
+    font-feature-settings: "kern", "liga", "calt";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    color: var(--color-ink);
+    font-weight: 560;
+    letter-spacing: -0.012em;
+  }
+
+  ::selection {
+    background: var(--color-clay);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
 }
+
+@layer components {
 
 /* Skip to main content */
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: -48px;
   left: 0;
-  background: #2A6EBB;
-  color: white;
-  padding: 8px 16px;
+  background: var(--color-navy);
+  color: #fff;
+  padding: 10px 18px;
   z-index: 100;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 600;
   border-radius: 0 0 4px 0;
+  transition: top 0.2s ease;
 }
-
 .skip-link:focus {
   top: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ── Eyebrow: small-caps label with a leading rule (replaces pills) ─ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-hanken), sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-sage-deep);
+}
+.eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+.eyebrow--center {
+  justify-content: center;
+}
+.eyebrow--center::after {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+.eyebrow--light {
+  color: var(--color-brass);
 }
 
-body {
-  font-family: var(--font-jost), system-ui, sans-serif;
-  color: #111827;
-  background-color: #ffffff;
-  -webkit-font-smoothing: antialiased;
+/* ── Hairline rule ──────────────────────────────────────────────── */
+.rule {
+  border: 0;
+  height: 1px;
+  background: var(--color-line);
 }
 
-/* ─── Keyframe animations ─────────────────────────────── */
-@keyframes fade-in-up {
+/* ── Editorial lead paragraph ───────────────────────────────────── */
+.lead {
+  font-size: 1.2rem;
+  line-height: 1.75;
+  color: var(--color-ink);
+}
+
+/* ── Drop cap for long-form clinical articles ───────────────────── */
+.dropcap::first-letter {
+  font-family: var(--font-fraunces), serif;
+  font-weight: 600;
+  font-size: 3.6em;
+  line-height: 0.74;
+  float: left;
+  padding: 0.04em 0.12em 0 0;
+  color: var(--color-clay);
+}
+
+/* ── Buttons ────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-hanken), sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  padding: 0.9rem 1.6rem;
+  border-radius: var(--radius-xs);
+  transition: background-color 0.2s ease, color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-clay {
+  background: var(--color-clay);
+  color: #fbf7ee;
+}
+.btn-clay:hover {
+  background: var(--color-clay-deep);
+}
+
+.btn-navy {
+  background: var(--color-navy);
+  color: #f4eee2;
+}
+.btn-navy:hover {
+  background: var(--color-navy-soft);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-navy);
+  box-shadow: inset 0 0 0 1.5px var(--color-navy);
+}
+.btn-outline:hover {
+  background: var(--color-navy);
+  color: #f4eee2;
+}
+
+/* On dark navy sections */
+.btn-outline-light {
+  background: transparent;
+  color: #f4eee2;
+  box-shadow: inset 0 0 0 1.5px rgba(244, 238, 226, 0.55);
+}
+.btn-outline-light:hover {
+  background: #f4eee2;
+  color: var(--color-navy);
+  box-shadow: inset 0 0 0 1.5px #f4eee2;
+}
+
+/* ── Inline "read more" link with sliding arrow ─────────────────── */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-hanken), sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-clay-deep);
+  letter-spacing: 0.01em;
+}
+.link-arrow > .arrow {
+  transition: transform 0.25s ease;
+}
+.link-arrow:hover > .arrow {
+  transform: translateX(4px);
+}
+
+/* ── Editorial card ─────────────────────────────────────────────── */
+.card {
+  background: var(--color-paper-raised);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+.card-link {
+  transition: border-color 0.25s ease, transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.card-link:hover {
+  border-color: var(--color-line-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px -24px rgba(15, 31, 61, 0.45);
+}
+
+/* ── Photographic plate (framed figure with caption) ────────────── */
+.plate {
+  position: relative;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-sand);
+}
+.plate-caption {
+  font-family: var(--font-hanken), sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ── Form fields ────────────────────────────────────────────────── */
+.field {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  background: var(--color-paper-raised);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-hanken), sans-serif;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.field::placeholder {
+  color: #a59c89;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-clay);
+  box-shadow: 0 0 0 3px rgba(177, 90, 50, 0.16);
+}
+
+/* ── Paper grain: a faint warm texture so flat sections breathe ──── */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: radial-gradient(
+    rgba(120, 105, 80, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 4px 4px;
+}
+
+} /* end @layer components */
+
+/* ============================================================================
+   MOTION — restrained. Honors prefers-reduced-motion.
+   ========================================================================== */
+@keyframes fade-rise {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 @keyframes fade-in {
   from { opacity: 0; }
-  to   { opacity: 1; }
+  to { opacity: 1; }
+}
+@keyframes rule-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.animate-fade-rise {
+  animation: fade-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.6; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
-}
-
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* ─── Animation utility classes ──────────────────────── */
-.animate-fade-in-up {
-  animation: fade-in-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 .animate-fade-in {
-  animation: fade-in 0.5s ease both;
+  animation: fade-in 0.7s ease both;
 }
 
-.animate-scale-in {
-  animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.22s; }
+.delay-3 { animation-delay: 0.34s; }
+.delay-4 { animation-delay: 0.46s; }
+.delay-5 { animation-delay: 0.58s; }
 
-.animate-slide-in-left {
-  animation: slide-in-left 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* Staggered delay helpers */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-.delay-600 { animation-delay: 600ms; }
-.delay-700 { animation-delay: 700ms; }
-.delay-800 { animation-delay: 800ms; }
-
-/* ─── Scroll-reveal: hidden until JS adds .is-visible ── */
+/* Scroll reveal — hidden until JS adds .is-visible */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
 }
-
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+.reveal-rule {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-rule.is-visible {
+  transform: scaleX(1);
 }
 
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-28px);
-  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-left.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(28px);
-  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-right.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-scale.is-visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* ─── Image shimmer placeholder ──────────────────────── */
-.img-placeholder {
-  background: linear-gradient(
-    90deg,
-    #e8f0fb 25%,
-    #d0e0f5 50%,
-    #e8f0fb 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite linear;
-}
-
-/* ─── Gradient text ──────────────────────────────────── */
-.gradient-text {
-  background: linear-gradient(135deg, #2A6EBB 0%, #1A8A7A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ─── Card hover lift ─────────────────────────────────── */
-.card-lift {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(15, 31, 61, 0.12);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fade-rise,
+  .animate-fade-in {
+    animation: none;
+  }
+  .reveal,
+  .reveal-rule {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

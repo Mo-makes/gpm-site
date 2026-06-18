@@ -9,23 +9,27 @@ export default function ConditionCard({ condition }: ConditionCardProps) {
   return (
     <Link
       href={`/conditions/${condition.slug}`}
-      className="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all p-5 flex gap-4 items-start"
+      className="card card-link group p-6 flex flex-col h-full"
     >
-      <div
-        className="w-2 flex-shrink-0 self-stretch rounded-full bg-brand-blue/20 group-hover:bg-brand-blue/40 transition-colors mt-0.5"
+      <span
+        className="block h-px w-9 bg-clay mb-5 transition-all duration-300 group-hover:w-16"
         aria-hidden="true"
       />
-      <div>
-        <h3 className="font-semibold text-brand-navy group-hover:text-brand-blue transition-colors text-base mb-1">
-          {condition.name}
-        </h3>
-        <p className="text-sm text-text-muted leading-relaxed">
-          {condition.shortDescription}
-        </p>
-        <span className="inline-block mt-3 text-xs font-semibold text-brand-blue">
-          Learn more →
+      <h3
+        className="font-fraunces text-[1.28rem] text-ink leading-snug mb-2.5"
+        style={{ fontWeight: 560 }}
+      >
+        {condition.name}
+      </h3>
+      <p className="text-[0.92rem] text-body leading-relaxed flex-grow">
+        {condition.shortDescription}
+      </p>
+      <span className="link-arrow mt-5">
+        Read more{" "}
+        <span className="arrow" aria-hidden="true">
+          →
         </span>
-      </div>
+      </span>
     </Link>
   );
 }

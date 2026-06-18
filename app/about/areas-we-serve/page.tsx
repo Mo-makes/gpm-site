@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import StickyCallBar from "@/components/StickyCallBar";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Areas We Serve | Pasadena, Kent Island & Columbia Pain Management",
@@ -65,51 +66,47 @@ export default function AreasWeServePage() {
       <Header />
       <main id="main-content">
         <HeroSection
-          headline="Pain Management Serving Central Maryland"
+          badge="Service Area"
+          headline="Pain management serving central Maryland"
           subheadline="Experience a world of difference. Conveniently located on Ritchie Highway in Pasadena, we serve patients from Pasadena, Kent Island, Columbia, and across Anne Arundel, Queen Anne's, and Howard Counties."
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
         />
 
-        <section className="bg-white py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Service Area
-              </span>
-              <h2
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
-              >
-                Communities We Serve
+        <section className="bg-paper py-16 lg:py-24">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12">
+              <p className="eyebrow mb-5">Communities We Serve</p>
+              <h2 className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-4">
+                Convenient to all of central Maryland
               </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                Our convenient Pasadena location makes us accessible to patients
-                throughout central Maryland. We also offer telemedicine follow-up
-                visits for established patients anywhere in Maryland.
+              <p className="lead text-body">
+                Our Pasadena location makes us accessible to patients throughout the
+                region. Established patients anywhere in Maryland can also use our
+                telemedicine follow-up program.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {areas.map((area) => (
                 <div
                   key={area.name}
-                  className={`rounded-xl p-6 border ${
+                  className={`rounded-[5px] p-6 ${
                     area.highlight
-                      ? "bg-brand-blue text-white border-brand-blue"
-                      : "bg-brand-cream border-gray-100"
+                      ? "bg-navy text-paper"
+                      : "card"
                   }`}
                 >
                   <h3
-                    className={`font-bold text-lg mb-2 ${
-                      area.highlight ? "text-white" : "text-brand-navy"
+                    className={`font-fraunces text-[1.2rem] mb-2.5 ${
+                      area.highlight ? "text-paper" : "text-ink"
                     }`}
-                    style={{ fontFamily: "var(--font-montserrat)" }}
+                    style={{ fontWeight: 560 }}
                   >
                     {area.name}
                   </h3>
                   <p
-                    className={`text-sm leading-relaxed ${
-                      area.highlight ? "text-blue-100" : "text-text-muted"
+                    className={`text-[0.92rem] leading-relaxed ${
+                      area.highlight ? "text-paper/75" : "text-body"
                     }`}
                   >
                     {area.description}
@@ -118,28 +115,19 @@ export default function AreasWeServePage() {
               ))}
             </div>
 
-            <div className="mt-16 bg-brand-navy text-white rounded-2xl p-8 text-center">
-              <h2
-                className="text-2xl font-bold mb-3"
-                style={{ fontFamily: "var(--font-montserrat)" }}
-              >
-                Not Sure If We Serve Your Area?
+            <div className="mt-14 bg-sand border border-line-strong rounded-[6px] p-8 lg:p-10 text-center">
+              <h2 className="text-2xl lg:text-3xl text-ink mb-3">
+                Not sure if we serve your area?
               </h2>
-              <p className="text-blue-100 mb-6 max-w-xl mx-auto text-sm leading-relaxed">
-                Give us a call — if we cannot help you directly, we will do
-                our best to point you toward the right care in your community.
+              <p className="text-body mb-7 max-w-xl mx-auto text-[0.97rem] leading-relaxed">
+                Give us a call — if we cannot help you directly, we will do our best to
+                point you toward the right care in your community.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="tel:4438254050"
-                  className="bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
-                >
-                  Call (443) 825-4050
+                <a href={PHONE_HREF} className="btn btn-clay">
+                  Call {PHONE_DISPLAY}
                 </a>
-                <Link
-                  href="/contact"
-                  className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-navy transition-colors text-sm"
-                >
+                <Link href="/contact" className="btn btn-outline">
                   Send Us a Message
                 </Link>
               </div>

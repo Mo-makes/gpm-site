@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import StickyCallBar from "@/components/StickyCallBar";
 import { procedures } from "@/lib/data/procedures";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Pain Management Procedures & Treatments | Pasadena, MD",
@@ -26,140 +27,107 @@ const breadcrumbJsonLd = {
 const interventional = procedures.filter((p) => p.category === "interventional");
 const nonInterventional = procedures.filter((p) => p.category !== "interventional");
 
+function ProcedureCard({
+  slug,
+  name,
+  shortDescription,
+}: {
+  slug: string;
+  name: string;
+  shortDescription: string;
+}) {
+  return (
+    <Link href={`/procedures/${slug}`} className="card card-link group p-6 flex flex-col h-full">
+      <h3 className="font-fraunces text-[1.22rem] text-ink leading-snug mb-2.5" style={{ fontWeight: 560 }}>
+        {name}
+      </h3>
+      <p className="text-[0.9rem] text-body leading-relaxed flex-grow">{shortDescription}</p>
+      <span className="link-arrow mt-5">
+        Learn more <span className="arrow" aria-hidden="true">→</span>
+      </span>
+    </Link>
+  );
+}
+
 export default function ProceduresPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <PatientPortalBanner />
       <Header />
       <main id="main-content">
         <HeroSection
-          headline="Procedures & Treatments"
-          subheadline="Experience a world of difference. We offer a comprehensive range of interventional and supportive pain management therapies — from targeted spinal injections to acupuncture and biofeedback."
+          badge="Procedures & Treatments"
+          headline="Targeted relief, delivered with precision"
+          subheadline="Experience a world of difference. From minimally invasive spinal injections to integrative therapies like acupuncture and biofeedback, we offer a full spectrum of interventional and supportive pain treatments."
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
           secondaryCta={{ label: "View Conditions", href: "/conditions" }}
         />
 
         {/* Interventional */}
-        <section className="bg-white py-16 lg:py-20" aria-labelledby="interventional-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Interventional
-              </span>
+        <section className="bg-paper py-16 lg:py-24" aria-labelledby="interventional-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12">
+              <p className="eyebrow mb-5">Interventional</p>
               <h2
                 id="interventional-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-4"
               >
-                Interventional Pain Procedures
+                Interventional pain procedures
               </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                Our board-certified pain physician performs minimally invasive
-                injection-based procedures that deliver targeted relief directly
-                to the source of your pain.
+              <p className="lead text-body">
+                Our board-certified physician performs minimally invasive, injection-based
+                procedures that deliver relief directly to the source of your pain.
               </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {interventional.map((proc) => (
-                <Link
-                  key={proc.slug}
-                  href={`/procedures/${proc.slug}`}
-                  className="group bg-brand-cream rounded-xl p-6 border border-gray-100 hover:border-brand-blue/30 hover:shadow-md transition-all"
-                >
-                  <h3
-                    className="font-bold text-brand-navy group-hover:text-brand-blue transition-colors text-base mb-2"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    {proc.name}
-                  </h3>
-                  <p className="text-sm text-text-muted leading-relaxed mb-3">
-                    {proc.shortDescription}
-                  </p>
-                  <span className="text-xs font-semibold text-brand-blue">
-                    Learn more →
-                  </span>
-                </Link>
+                <ProcedureCard key={proc.slug} {...proc} />
               ))}
             </div>
           </div>
         </section>
 
         {/* Other therapies */}
-        <section className="bg-brand-cream py-16 lg:py-20" aria-labelledby="therapies-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Supportive Therapies
-              </span>
+        <section className="bg-sand py-16 lg:py-24" aria-labelledby="therapies-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12">
+              <p className="eyebrow mb-5">Supportive Therapies</p>
               <h2
                 id="therapies-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-4"
               >
-                Medication & Complementary Therapies
+                Medication &amp; complementary therapies
               </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                Beyond injections, we offer a range of medication management
-                protocols and integrative therapies that complement your overall
-                treatment plan.
+              <p className="lead text-body">
+                Beyond injections, we offer medication management protocols and integrative
+                therapies that complement your overall treatment plan.
               </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {nonInterventional.map((proc) => (
-                <Link
-                  key={proc.slug}
-                  href={`/procedures/${proc.slug}`}
-                  className="group bg-white rounded-xl p-6 border border-gray-100 hover:border-brand-blue/30 hover:shadow-md transition-all"
-                >
-                  <h3
-                    className="font-bold text-brand-navy group-hover:text-brand-blue transition-colors text-base mb-2"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    {proc.name}
-                  </h3>
-                  <p className="text-sm text-text-muted leading-relaxed mb-3">
-                    {proc.shortDescription}
-                  </p>
-                  <span className="text-xs font-semibold text-brand-blue">
-                    Learn more →
-                  </span>
-                </Link>
+                <ProcedureCard key={proc.slug} {...proc} />
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="bg-brand-navy text-white py-16">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2
-              className="text-3xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
-              Find Out Which Treatment Is Right for You
+        <section className="bg-navy text-paper py-16 lg:py-20">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl lg:text-[2.4rem] leading-[1.1] text-paper mb-4">
+              Find out which treatment is right for you
             </h2>
-            <p className="text-blue-100 mb-8 leading-relaxed">
-              Every treatment plan at Global Pain Management begins with a
-              comprehensive evaluation. Schedule yours today.
+            <p className="text-paper/75 mb-8 leading-relaxed">
+              Every treatment plan begins with a comprehensive evaluation. Schedule yours
+              today.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
-              >
+              <Link href="/contact" className="btn btn-clay">
                 Request Appointment
               </Link>
-              <a
-                href="tel:4438254050"
-                className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-navy transition-colors text-sm"
-              >
-                Call (443) 825-4050
+              <a href={PHONE_HREF} className="btn btn-outline-light">
+                Call {PHONE_DISPLAY}
               </a>
             </div>
           </div>

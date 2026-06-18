@@ -8,10 +8,19 @@ import ProviderCard from "@/components/ProviderCard";
 import ConditionCard from "@/components/ConditionCard";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import ContactForm from "@/components/ContactForm";
+import OfficeHoursCard from "@/components/OfficeHoursCard";
 import StickyCallBar from "@/components/StickyCallBar";
 import { providers } from "@/lib/data/providers";
 import { conditions } from "@/lib/data/conditions";
 import { testimonials } from "@/lib/data/testimonials";
+import {
+  yearsInService,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  FAX_DISPLAY,
+  ADDRESS,
+  MAPS_URL,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Pain Management in Pasadena, MD | Global Pain Management",
@@ -57,8 +66,8 @@ const localBusinessJsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 39.11940,
-    longitude: -76.57370,
+    latitude: 39.1194,
+    longitude: -76.5737,
   },
   openingHoursSpecification: [
     {
@@ -93,25 +102,33 @@ const websiteJsonLd = {
   publisher: { "@id": "https://globalpainmd.com/#organization" },
 };
 
-const valueProps = [
+const principles = [
   {
-    title: "Personalized Treatment Plans",
-    description:
-      "Every patient receives a customized care plan built around their specific condition, goals, and lifestyle.",
+    n: "01",
+    title: "Individualized treatment plans",
+    body: "Every plan is built around your diagnosis, your goals, and your life — never a template. We listen before we prescribe.",
   },
   {
-    title: "Board-Certified Physicians",
-    description:
-      "Our founding physician is board-certified in pain management with fellowship training in interventional techniques.",
+    n: "02",
+    title: "Board-certified, fellowship-trained",
+    body: "Our founding physician is dual board-certified in pain medicine and anesthesiology, with interventional fellowship training at UMD Shock Trauma.",
   },
   {
-    title: "Locally Owned Since 2013",
-    description:
-      "A community-rooted practice founded by Dr. Haddi Ogunsola to serve Pasadena, Kent Island, Columbia, and Maryland's surrounding counties.",
+    n: "03",
+    title: "Independent since 2013",
+    body: "A locally owned practice accountable to its patients and community — not a health system or a corporate parent.",
   },
 ];
 
 export default function HomePage() {
+  const years = yearsInService();
+  const stats = [
+    { value: "2013", label: "Year founded" },
+    { value: `${years}`, label: "Years serving Maryland" },
+    { value: "3", label: "Dedicated providers" },
+    { value: "Thousands", label: "Patients treated" },
+  ];
+
   return (
     <>
       <script
@@ -136,27 +153,28 @@ export default function HomePage() {
           badge="Serving Maryland Since 2013"
         />
 
-        {/* Value strip */}
-        <section className="bg-white py-12 border-b border-gray-100" aria-label="Why choose us">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {valueProps.map((prop) => (
-                <div key={prop.title} className="flex items-start gap-4">
-                  <div
-                    className="w-1 flex-shrink-0 self-stretch rounded-full bg-brand-blue mt-1"
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <h2
-                      className="font-bold text-brand-navy text-base mb-1"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
-                      {prop.title}
-                    </h2>
-                    <p className="text-sm text-text-muted leading-relaxed">
-                      {prop.description}
-                    </p>
-                  </div>
+        {/* Practice in brief */}
+        <section className="bg-sand py-16 lg:py-24" aria-labelledby="brief-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12 lg:mb-16">
+              <p className="eyebrow mb-5">Why Global Pain Management</p>
+              <h2
+                id="brief-heading"
+                className="text-3xl lg:text-[2.7rem] leading-[1.1] text-ink"
+              >
+                Specialist pain care, delivered with intention.
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+              {principles.map((p) => (
+                <div key={p.n} className="border-t border-line-strong pt-6">
+                  <p className="font-fraunces text-clay text-2xl mb-3" style={{ fontWeight: 500 }}>
+                    {p.n}
+                  </p>
+                  <h3 className="font-fraunces text-[1.3rem] text-ink mb-2.5" style={{ fontWeight: 560 }}>
+                    {p.title}
+                  </h3>
+                  <p className="text-[0.95rem] text-body leading-relaxed">{p.body}</p>
                 </div>
               ))}
             </div>
@@ -164,176 +182,120 @@ export default function HomePage() {
         </section>
 
         {/* Conditions */}
-        <section className="bg-brand-cream py-16 lg:py-20" aria-labelledby="conditions-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Conditions We Treat
-              </span>
-              <h2
-                id="conditions-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
-              >
-                Comprehensive Pain Management Care
-              </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                From neck and back pain to arthritis, cancer pain, and auto
-                accident injuries — our specialists treat a wide range of acute
-                and chronic pain conditions.
-              </p>
+        <section className="bg-paper py-16 lg:py-24" aria-labelledby="conditions-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+              <div className="max-w-2xl">
+                <p className="eyebrow mb-5">Conditions We Treat</p>
+                <h2
+                  id="conditions-heading"
+                  className="text-3xl lg:text-[2.7rem] leading-[1.1] text-ink mb-4"
+                >
+                  From everyday back pain to the most complex cases
+                </h2>
+                <p className="lead text-body">
+                  Our board-certified team treats a comprehensive range of acute and
+                  chronic pain conditions — including many that have resisted other
+                  treatment.
+                </p>
+              </div>
+              <Link href="/conditions" className="link-arrow shrink-0 lg:pb-2">
+                View all conditions <span className="arrow" aria-hidden="true">→</span>
+              </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {conditions.slice(0, 9).map((condition) => (
                 <ConditionCard key={condition.slug} condition={condition} />
               ))}
             </div>
-            <div className="text-center mt-8">
-              <Link
-                href="/conditions"
-                className="inline-flex items-center gap-2 border-2 border-brand-blue text-brand-blue px-6 py-3 rounded-lg font-semibold hover:bg-brand-blue hover:text-white transition-colors text-sm"
-              >
-                View All Conditions →
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="/conditions" className="btn btn-outline">
+                All Conditions
+              </Link>
+              <Link href="/procedures" className="btn btn-outline">
+                Explore Procedures
               </Link>
             </div>
           </div>
         </section>
 
         {/* Providers */}
-        <section className="bg-white py-16 lg:py-20" aria-labelledby="providers-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Our Team
-              </span>
+        <section className="bg-sand py-16 lg:py-24" aria-labelledby="providers-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12">
+              <p className="eyebrow mb-5">Your Care Team</p>
               <h2
                 id="providers-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="text-3xl lg:text-[2.7rem] leading-[1.1] text-ink mb-4"
               >
-                Meet Your Care Team
+                The people behind your care
               </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                Our experienced providers are dedicated to understanding your
-                unique pain experience and building a treatment plan that works
-                for your life.
+              <p className="lead text-body">
+                Experienced providers dedicated to understanding your pain and building a
+                plan that fits your life.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
               {providers.map((provider) => (
                 <ProviderCard key={provider.slug} provider={provider} />
               ))}
             </div>
-            <div className="text-center mt-8">
-              <Link
-                href="/about/team"
-                className="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline"
-              >
-                Full team bios and credentials →
+            <div className="mt-10">
+              <Link href="/about/team" className="link-arrow">
+                Full team bios &amp; credentials{" "}
+                <span className="arrow" aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="bg-brand-cream py-16 lg:py-20" aria-labelledby="testimonials-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Patient Stories
-              </span>
-              <h2
-                id="testimonials-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
-              >
-                What Our Patients Are Saying
-              </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                Real experiences from patients in Pasadena, Kent Island, Columbia,
-                and across Anne Arundel County.
-              </p>
-            </div>
-            <TestimonialCarousel testimonials={testimonials} />
-            <div className="text-center mt-8">
-              <Link
-                href="/testimonials"
-                className="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline"
-              >
-                Read all patient testimonials →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* About / Practice History */}
-        <section
-          className="bg-brand-navy text-white py-16 lg:py-20"
-          aria-labelledby="about-heading"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Story / stats — navy */}
+        <section className="bg-navy text-paper py-16 lg:py-24" aria-labelledby="about-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
               <div>
-                <span className="inline-block bg-brand-blue/30 text-brand-blue-light text-sm font-semibold px-3 py-1 rounded-full mb-4">
-                  Our Story
-                </span>
+                <p className="eyebrow eyebrow--light mb-5">Our Story</p>
                 <h2
                   id="about-heading"
-                  className="text-3xl lg:text-4xl font-bold mb-6"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
+                  className="text-3xl lg:text-[2.7rem] leading-[1.1] text-paper mb-6"
                 >
-                  Rooted in Our Community Since 2013
+                  Rooted in this community since 2013
                 </h2>
-                <div className="space-y-4 text-blue-100 leading-relaxed">
+                <div className="space-y-4 text-paper/75 leading-relaxed">
                   <p>
-                    Global Pain Management was founded in 2013 by Dr. Haddi
-                    Ogunsola with a clear mission: to provide the people of
-                    Pasadena, Kent Island, Columbia, and Anne Arundel County with access
-                    to the same quality of interventional pain care found at
-                    major academic medical centers — close to home.
+                    Dr. Haddi Ogunsola founded Global Pain Management with a clear
+                    mission: to give the people of Pasadena, Kent Island, Columbia, and
+                    Anne Arundel County access to the same interventional pain care found
+                    at major academic medical centers — close to home.
                   </p>
                   <p>
-                    Over more than fifteen years, we have helped thousands of
-                    patients manage chronic and acute pain conditions, recover
-                    from work and auto accidents, and regain the quality of life
-                    that pain had stolen from them. We believe pain management
-                    is deeply personal work, and we are committed to treating
-                    every patient as an individual — not a diagnosis.
+                    For more than a decade we have helped thousands of patients manage
+                    chronic and acute pain, recover from work and auto injuries, and
+                    regain the quality of life that pain had taken. We treat every patient
+                    as an individual — not a diagnosis.
                   </p>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <Link
-                    href="/about"
-                    className="inline-flex items-center bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
-                  >
+                  <Link href="/about" className="btn btn-clay">
                     Learn About Us
                   </Link>
-                  <Link
-                    href="/about/team"
-                    className="inline-flex items-center border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-navy transition-colors text-sm"
-                  >
+                  <Link href="/about/team" className="btn btn-outline-light">
                     Meet the Team
                   </Link>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { value: "2013", label: "Year Founded" },
-                  { value: "15+", label: "Years Serving Maryland" },
-                  { value: "3", label: "Experienced Providers" },
-                  { value: "1000s", label: "Patients Treated" },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="bg-brand-slate rounded-xl p-6 text-center"
-                  >
+              <div className="grid grid-cols-2 gap-px bg-paper/12 border border-paper/12 rounded-[5px] overflow-hidden">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="bg-navy p-7 text-center">
                     <p
-                      className="text-4xl font-extrabold text-brand-blue mb-2"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
+                      className="font-fraunces text-4xl lg:text-[2.9rem] text-brass leading-none mb-2"
+                      style={{ fontWeight: 500 }}
                     >
                       {stat.value}
                     </p>
-                    <p className="text-blue-200 text-sm font-medium">{stat.label}</p>
+                    <p className="text-paper/60 text-[0.8rem] uppercase tracking-[0.12em]">
+                      {stat.label}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -341,59 +303,88 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Contact + Map */}
-        <section className="bg-white py-16 lg:py-20" aria-labelledby="contact-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {/* Testimonials */}
+        <section className="bg-paper py-16 lg:py-24" aria-labelledby="testimonials-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12">
+              <p className="eyebrow mb-5">Patient Stories</p>
+              <h2
+                id="testimonials-heading"
+                className="text-3xl lg:text-[2.7rem] leading-[1.1] text-ink mb-4"
+              >
+                In our patients&apos; own words
+              </h2>
+              <p className="lead text-body">
+                Real experiences from patients across Pasadena, Kent Island, Columbia, and
+                Anne Arundel County.
+              </p>
+            </div>
+            <TestimonialCarousel testimonials={testimonials} />
+            <div className="text-center mt-10">
+              <Link href="/testimonials" className="link-arrow">
+                Read all patient testimonials{" "}
+                <span className="arrow" aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact + location */}
+        <section className="bg-sand py-16 lg:py-24" aria-labelledby="contact-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               <div>
-                <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                  Get in Touch
-                </span>
+                <p className="eyebrow mb-5">Get in Touch</p>
                 <h2
                   id="contact-heading"
-                  className="text-3xl font-bold text-brand-navy mb-2"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
+                  className="text-3xl lg:text-[2.4rem] leading-[1.1] text-ink mb-3"
                 >
-                  Request an Appointment
+                  Request an appointment
                 </h2>
-                <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                  Fill out the form and a member of our team will reach out
-                  within one business day to schedule your visit.
+                <p className="text-body mb-8 leading-relaxed">
+                  Fill out the form and a member of our team will reach out within one
+                  business day to schedule your visit.
                 </p>
                 <ContactForm />
               </div>
               <div className="space-y-6">
-                <div className="bg-brand-cream rounded-xl p-6">
-                  <h3
-                    className="font-bold text-brand-navy text-lg mb-4"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    Our Location
-                  </h3>
-                  <address className="not-italic text-sm text-text-primary space-y-2 leading-relaxed">
-                    <p className="font-semibold">Global Pain Management</p>
-                    <p>8031 Ritchie Highway, Suite 100</p>
-                    <p>Pasadena, MD 21122</p>
-                    <div className="mt-4 space-y-1">
+                <div className="card p-7">
+                  <p className="eyebrow mb-4">Our Office</p>
+                  <address className="not-italic text-[0.97rem] text-body space-y-1.5 leading-relaxed">
+                    <p className="font-fraunces text-lg text-ink" style={{ fontWeight: 560 }}>
+                      Global Pain Management
+                    </p>
+                    <p>{ADDRESS.line1}</p>
+                    <p>
+                      {ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}
+                    </p>
+                    <div className="pt-3 space-y-1">
                       <p>
-                        <a
-                          href="tel:4438254050"
-                          className="text-brand-blue font-semibold hover:underline"
-                        >
-                          (443) 825-4050
-                        </a>{" "}
-                        — Phone
+                        <a href={PHONE_HREF} className="text-clay-deep font-semibold hover:underline">
+                          {PHONE_DISPLAY}
+                        </a>
+                        <span className="text-muted"> · phone</span>
                       </p>
-                      <p className="text-text-muted">(443) 825-4051 — Fax</p>
+                      <p className="text-muted text-[0.88rem]">{FAX_DISPLAY} · fax</p>
                     </div>
                   </address>
+                  <div className="mt-5">
+                    <a
+                      href={MAPS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline w-full text-[0.85rem] py-2.5"
+                    >
+                      Get Directions
+                    </a>
+                  </div>
                 </div>
-                <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+                <OfficeHoursCard />
+                <div className="plate" style={{ aspectRatio: "16 / 10" }}>
                   <iframe
                     title="Global Pain Management location on Google Maps"
                     src="https://maps.google.com/maps?q=8031+Ritchie+Hwy+Suite+100+Pasadena+MD+21122&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                    width="100%"
-                    height="280"
+                    className="w-full h-full"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"

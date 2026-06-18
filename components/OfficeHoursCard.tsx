@@ -12,36 +12,42 @@ const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
 
 export default function OfficeHoursCard() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <h3
-        className="text-lg font-bold text-brand-navy mb-4"
-        style={{ fontFamily: "var(--font-montserrat)" }}
-      >
-        Office Hours
-      </h3>
-      <ul className="space-y-2">
+    <div className="card p-6">
+      <p className="eyebrow mb-4">Office Hours</p>
+      <ul className="divide-y divide-line">
         {hours.map(({ day, time }) => {
           const isToday = day === today;
           return (
             <li
               key={day}
-              className={`flex justify-between text-sm py-1.5 px-2 rounded ${
-                isToday ? "bg-brand-blue-light font-semibold" : ""
-              }`}
+              className="flex justify-between items-center text-[0.92rem] py-2.5"
               aria-current={isToday ? "true" : undefined}
             >
-              <span className={isToday ? "text-brand-navy" : "text-text-primary"}>
+              <span className={isToday ? "text-ink font-semibold" : "text-body"}>
                 {day}
+                {isToday && (
+                  <span className="ml-2 text-[0.6rem] uppercase tracking-[0.14em] text-clay align-middle">
+                    Today
+                  </span>
+                )}
               </span>
-              <span className={isToday ? "text-brand-blue" : "text-text-muted"}>
+              <span
+                className={
+                  isToday
+                    ? "text-ink font-semibold"
+                    : time === "Closed"
+                    ? "text-muted"
+                    : "text-body"
+                }
+              >
                 {time}
               </span>
             </li>
           );
         })}
       </ul>
-      <p className="text-xs text-text-muted mt-4 italic">
-        * Hours subject to change. Call ahead to confirm.
+      <p className="text-[0.78rem] text-muted mt-4 italic">
+        Hours subject to change — please call ahead to confirm.
       </p>
     </div>
   );

@@ -8,8 +8,8 @@ export default function CheckInCompletePage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white p-8 text-center">
-      <p className="text-lg text-brand-navy">Check-in submitted successfully.</p>
+    <div className="flex min-h-screen items-center justify-center bg-paper p-8 text-center">
+      <p className="text-lg text-navy">Check-in submitted successfully.</p>
     </div>
   );
 }

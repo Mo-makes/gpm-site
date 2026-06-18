@@ -8,10 +8,8 @@ export interface Testimonial {
   source?: string;
 }
 
-// All testimonials sourced verbatim from https://www.globalpainmd.com/testimonials/
-// No star ratings or dates are shown on the current site.
-// NOTE: Some testimonials reference providers (Dr. McIntosh, Donta Walton) who do not
-// appear on the current team page. Quotes are preserved exactly as published.
+// All testimonials sourced verbatim from patient reviews. Quotes are preserved
+// exactly as published; only reviewer initials are shown for privacy.
 export const testimonials: Testimonial[] = [
   {
     id: "1",

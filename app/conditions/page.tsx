@@ -8,6 +8,7 @@ import ConditionCard from "@/components/ConditionCard";
 import FAQAccordion from "@/components/FAQAccordion";
 import StickyCallBar from "@/components/StickyCallBar";
 import { conditions } from "@/lib/data/conditions";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Conditions We Treat | Pain Management Pasadena, MD",
@@ -53,83 +54,64 @@ const conditionFaqs = [
   },
 ];
 
-// FAQ JSON-LD for conditions page
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: conditionFaqs.map((faq) => ({
     "@type": "Question",
     name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
   })),
 };
 
 export default function ConditionsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <PatientPortalBanner />
       <Header />
       <main id="main-content">
         <HeroSection
-          headline="Conditions We Treat"
-          subheadline="Experience a world of difference. Our board-certified team treats a comprehensive range of acute and chronic pain conditions — from everyday back pain to complex, long-term conditions that have resisted other treatment."
+          badge="Conditions We Treat"
+          headline="A comprehensive range of pain conditions"
+          subheadline="Experience a world of difference. Our board-certified team treats acute and chronic pain — from everyday back pain to complex, long-term conditions that have resisted other treatment."
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
           secondaryCta={{ label: "View Procedures", href: "/procedures" }}
         />
 
-        <section className="bg-white py-16 lg:py-20" aria-labelledby="conditions-list-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                All Conditions
-              </span>
+        <section className="bg-paper py-16 lg:py-24" aria-labelledby="conditions-list-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12">
+              <p className="eyebrow mb-5">All Conditions</p>
               <h2
                 id="conditions-list-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-4"
               >
-                Comprehensive Pain Management Care
+                Select a condition to learn more
               </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                Select a condition below to learn more about how we diagnose
-                and treat it.
+              <p className="lead text-body">
+                Each page explains how we diagnose and treat the condition, the symptoms
+                we look for, and the options that may be part of your plan.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {conditions.map((condition) => (
                 <ConditionCard key={condition.slug} condition={condition} />
               ))}
             </div>
 
-            <div className="mt-12 bg-brand-cream rounded-2xl p-8 text-center">
-              <p className="text-text-muted mb-4 text-sm leading-relaxed">
-                Don&apos;t see your condition listed? We treat many additional
-                pain conditions not listed here. Call us to discuss whether we
-                can help.
+            <div className="mt-12 card p-8 text-center">
+              <p className="text-body mb-5 text-[0.97rem] leading-relaxed max-w-xl mx-auto">
+                Don&apos;t see your condition listed? We treat many additional pain
+                conditions. Call us to discuss whether we can help.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="tel:4438254050"
-                  className="bg-brand-blue text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
-                >
-                  Call (443) 825-4050
+                <a href={PHONE_HREF} className="btn btn-clay">
+                  Call {PHONE_DISPLAY}
                 </a>
-                <Link
-                  href="/contact"
-                  className="border-2 border-brand-blue text-brand-blue px-5 py-2.5 rounded-lg font-semibold hover:bg-brand-blue hover:text-white transition-colors text-sm"
-                >
+                <Link href="/contact" className="btn btn-outline">
                   Request Appointment
                 </Link>
               </div>
@@ -137,16 +119,15 @@ export default function ConditionsPage() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="bg-brand-cream py-16 lg:py-20" aria-labelledby="conditions-faq-heading">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
+        <section className="bg-sand py-16 lg:py-24" aria-labelledby="conditions-faq-heading">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-8">
+              <p className="eyebrow mb-5">Common Questions</p>
               <h2
                 id="conditions-faq-heading"
-                className="text-3xl font-bold text-brand-navy"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="text-3xl lg:text-[2.4rem] leading-[1.1] text-ink"
               >
-                Frequently Asked Questions
+                Frequently asked questions
               </h2>
             </div>
             <FAQAccordion faqs={conditionFaqs} />

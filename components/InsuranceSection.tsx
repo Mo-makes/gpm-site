@@ -1,44 +1,31 @@
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+
 export default function InsuranceSection() {
   return (
-    <section className="bg-brand-cream py-16 lg:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-          Insurance
-        </span>
-        <h2
-          className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-          style={{ fontFamily: "var(--font-montserrat)" }}
-        >
-          We Accept Most Insurance Plans
+    <section className="bg-paper py-16 lg:py-24 border-t border-line">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p className="eyebrow eyebrow--center mb-5">Insurance &amp; Billing</p>
+        <h2 className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-5">
+          We accept most major plans
         </h2>
-        <p className="text-text-muted max-w-2xl mx-auto leading-relaxed mb-8">
-          Global Pain Management works with most major insurance carriers,
-          including Medicare and many Maryland Medicaid plans. We also treat
-          workers&apos; compensation and personal injury patients. Please call
-          our office at{" "}
-          <a
-            href="tel:4438254050"
-            className="text-brand-blue font-semibold hover:underline"
-          >
-            (443) 825-4050
-          </a>{" "}
-          to verify your specific plan prior to your visit.
+        <p className="lead text-body">
+          Global Pain Management works with most major insurance carriers, including
+          Medicare and many Maryland Medicaid plans. We also treat workers&apos;
+          compensation and personal injury patients.
         </p>
-        <div className="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-6 py-4 shadow-sm">
-          <div className="w-1 self-stretch rounded-full bg-brand-blue flex-shrink-0" aria-hidden="true" />
-          <div className="text-left">
-            <p className="font-semibold text-brand-navy text-sm">
-              Insurance Verification
+
+        <div className="mt-10 card p-6 sm:p-7 flex flex-col sm:flex-row items-center gap-5 text-left">
+          <div className="flex-1">
+            <p className="font-fraunces text-[1.15rem] text-ink" style={{ fontWeight: 560 }}>
+              Verify your coverage first
             </p>
-            <p className="text-xs text-text-muted mt-0.5">
-              Call us to confirm your coverage before your appointment
+            <p className="text-[0.92rem] text-body mt-1 leading-relaxed">
+              Call our office with your insurance card handy and we&apos;ll confirm your
+              specific plan before your visit.
             </p>
           </div>
-          <a
-            href="tel:4438254050"
-            className="ml-4 bg-brand-blue text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap"
-          >
-            (443) 825-4050
+          <a href={PHONE_HREF} className="btn btn-navy whitespace-nowrap shrink-0">
+            {PHONE_DISPLAY}
           </a>
         </div>
       </div>

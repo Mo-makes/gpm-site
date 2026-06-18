@@ -7,6 +7,7 @@ import HeroSection from "@/components/HeroSection";
 import FAQAccordion from "@/components/FAQAccordion";
 import OfficeHoursCard from "@/components/OfficeHoursCard";
 import StickyCallBar from "@/components/StickyCallBar";
+import { PHONE_DISPLAY, PHONE_HREF, PATIENT_PORTAL_URL, MAPS_URL, ADDRESS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Patient Resources | Global Pain Management",
@@ -58,6 +59,37 @@ const faqs = [
   },
 ];
 
+const quickLinks = [
+  {
+    title: "Patient Portal",
+    desc: "Access records, lab results, and messages",
+    href: PATIENT_PORTAL_URL,
+    external: true,
+    cta: "Log in",
+  },
+  {
+    title: "Call the Office",
+    desc: "Speak with our front desk team",
+    href: PHONE_HREF,
+    external: false,
+    cta: PHONE_DISPLAY,
+  },
+  {
+    title: "Get Directions",
+    desc: `${ADDRESS.line1}, ${ADDRESS.city}`,
+    href: MAPS_URL,
+    external: true,
+    cta: "View on Maps",
+  },
+  {
+    title: "Telemedicine",
+    desc: "Join your scheduled virtual visit",
+    href: "/about/team",
+    external: false,
+    cta: "Find your provider",
+  },
+];
+
 export default function PatientResourcesPage() {
   return (
     <>
@@ -65,73 +97,36 @@ export default function PatientResourcesPage() {
       <Header />
       <main id="main-content">
         <HeroSection
-          headline="Patient Resources"
-          subheadline="Experience a world of difference. Everything you need to prepare for your visit, access your records, and get the most from your care at Global Pain Management."
+          badge="Patient Resources"
+          headline="Everything you need before your visit"
+          subheadline="Experience a world of difference. Prepare for your appointment, access your records, and get the most from your care at Global Pain Management."
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
         />
 
-        <section className="bg-white py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              {/* Main content */}
-              <div className="lg:col-span-2 space-y-12">
+        <section className="bg-paper py-16 lg:py-24">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-12 lg:gap-16">
+              {/* Main */}
+              <div className="space-y-14">
                 {/* Quick links */}
                 <div>
-                  <h2
-                    className="text-2xl font-bold text-brand-navy mb-6"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    Quick Links
-                  </h2>
+                  <p className="eyebrow mb-5">Quick Links</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {[
-                      {
-                        title: "Patient Portal",
-                        desc: "Access records, lab results, and messages",
-                        href: "https://www.yourhealthfile.com/portal/login.jsp",
-                        external: true,
-                        cta: "Log In →",
-                      },
-                      {
-                        title: "Call the Office",
-                        desc: "Speak with our front desk team",
-                        href: "tel:4438254050",
-                        external: false,
-                        cta: "(443) 825-4050",
-                      },
-                      {
-                        title: "Get Directions",
-                        desc: "8031 Ritchie Hwy, Suite 100, Pasadena",
-                        href: "https://www.google.com/maps?cid=12291003481097695559",
-                        external: true,
-                        cta: "View on Maps →",
-                      },
-                      {
-                        title: "Telemedicine",
-                        desc: "Join your scheduled virtual visit",
-                        href: "/about/team",
-                        external: false,
-                        cta: "Find Your Provider →",
-                      },
-                    ].map((item) => (
+                    {quickLinks.map((item) => (
                       <a
                         key={item.title}
                         href={item.href}
                         target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        className="flex items-start gap-4 bg-brand-cream rounded-xl p-5 hover:bg-brand-blue-light transition-colors group border-l-4 border-brand-blue/30 hover:border-brand-blue"
+                        className="card card-link group p-5"
                       >
-                        <div>
-                          <p className="font-bold text-brand-navy text-sm group-hover:text-brand-blue transition-colors">
-                            {item.title}
-                          </p>
-                          <p className="text-xs text-text-muted mt-0.5">
-                            {item.desc}
-                          </p>
-                          <p className="text-xs font-semibold text-brand-blue mt-2">
-                            {item.cta}
-                          </p>
-                        </div>
+                        <p className="font-fraunces text-[1.08rem] text-ink group-hover:text-clay-deep transition-colors" style={{ fontWeight: 560 }}>
+                          {item.title}
+                        </p>
+                        <p className="text-[0.85rem] text-muted mt-1">{item.desc}</p>
+                        <p className="link-arrow mt-3 text-[0.85rem]">
+                          {item.cta} <span className="arrow" aria-hidden="true">→</span>
+                        </p>
                       </a>
                     ))}
                   </div>
@@ -139,76 +134,60 @@ export default function PatientResourcesPage() {
 
                 {/* What to expect */}
                 <div>
-                  <h2
-                    className="text-2xl font-bold text-brand-navy mb-4"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    What to Expect at Your First Visit
+                  <p className="eyebrow mb-5">Before You Arrive</p>
+                  <h2 className="text-[1.8rem] text-ink mb-5" style={{ fontWeight: 560 }}>
+                    What to expect at your first visit
                   </h2>
-                  <div className="prose prose-sm max-w-none text-text-muted space-y-3 leading-relaxed">
-                    <p>
-                      Your first appointment at Global Pain Management is a
-                      comprehensive pain evaluation. We will review your complete
-                      medical history, the nature and duration of your pain,
-                      previous treatments you have tried, and any imaging or
-                      specialist reports you bring.
+                  <div className="space-y-4 text-body leading-relaxed">
+                    <p className="lead text-body dropcap">
+                      Your first appointment at Global Pain Management is a comprehensive
+                      pain evaluation. We review your complete medical history, the nature
+                      and duration of your pain, previous treatments you have tried, and any
+                      imaging or specialist reports you bring.
                     </p>
                     <p>
-                      A physical examination appropriate to your condition will
-                      be performed. After the evaluation, your provider will
-                      discuss their findings and recommend a treatment plan
-                      tailored to your condition and goals. You are encouraged
-                      to ask questions at every step.
+                      A physical examination appropriate to your condition will be
+                      performed. Afterward, your provider will discuss their findings and
+                      recommend a treatment plan tailored to your condition and goals. You
+                      are encouraged to ask questions at every step.
                     </p>
                     <p>
-                      Please plan to arrive 15–20 minutes early to complete
-                      intake paperwork. Bring a photo ID, your insurance card,
-                      a full medication list, and any relevant imaging.
+                      Please plan to arrive 15–20 minutes early to complete intake
+                      paperwork. Bring a photo ID, your insurance card, a full medication
+                      list, and any relevant imaging.
                     </p>
                   </div>
                 </div>
 
                 {/* FAQ */}
                 <div>
-                  <h2
-                    className="text-2xl font-bold text-brand-navy mb-6"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    Frequently Asked Questions
+                  <p className="eyebrow mb-5">Common Questions</p>
+                  <h2 className="text-[1.8rem] text-ink mb-6" style={{ fontWeight: 560 }}>
+                    Frequently asked questions
                   </h2>
                   <FAQAccordion faqs={faqs} />
                 </div>
               </div>
 
               {/* Sidebar */}
-              <div className="space-y-6">
+              <aside className="space-y-6 lg:sticky lg:top-28 self-start">
                 <OfficeHoursCard />
-
-                <div className="bg-brand-navy text-white rounded-xl p-6">
-                  <h3
-                    className="font-bold text-lg mb-3"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
+                <div className="bg-navy text-paper rounded-[5px] p-6">
+                  <p className="font-fraunces text-lg text-paper mb-2" style={{ fontWeight: 560 }}>
                     Questions?
-                  </h3>
-                  <p className="text-blue-100 text-sm mb-4 leading-relaxed">
-                    Our front desk team is here to help with scheduling,
-                    insurance verification, and any questions about your care.
                   </p>
-                  <a
-                    href="tel:4438254050"
-                    className="block w-full text-center bg-brand-blue text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors"
-                  >
-                    Call (443) 825-4050
+                  <p className="text-paper/70 text-[0.9rem] mb-4 leading-relaxed">
+                    Our front desk is here to help with scheduling, insurance verification,
+                    and any questions about your care.
+                  </p>
+                  <a href={PHONE_HREF} className="btn btn-clay w-full text-[0.85rem] py-2.5">
+                    Call {PHONE_DISPLAY}
                   </a>
-                  <Link
-                    href="/contact"
-                    className="block w-full text-center border border-white text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-white hover:text-brand-navy transition-colors mt-2"
-                  >
+                  <Link href="/contact" className="btn btn-outline-light w-full text-[0.85rem] py-2.5 mt-2.5">
                     Send a Message
                   </Link>
                 </div>
-              </div>
+              </aside>
             </div>
           </div>
         </section>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 const NAV_LINKS = [
   {
@@ -15,22 +16,10 @@ const NAV_LINKS = [
       { label: "Areas We Serve", href: "/about/areas-we-serve" },
     ],
   },
-  {
-    label: "Conditions",
-    href: "/conditions",
-  },
-  {
-    label: "Procedures",
-    href: "/procedures",
-  },
-  {
-    label: "Testimonials",
-    href: "/testimonials",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-  },
+  { label: "Conditions", href: "/conditions" },
+  { label: "Procedures", href: "/procedures" },
+  { label: "Testimonials", href: "/testimonials" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
@@ -40,7 +29,7 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 16);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -50,16 +39,19 @@ export default function Header() {
     setOpenDropdown(null);
   }, [pathname]);
 
+  const isActive = (href: string) =>
+    href === "/about" ? pathname.startsWith("/about") : pathname === href;
+
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 bg-navy border-b transition-shadow duration-300 ${
         scrolled
-          ? "bg-brand-navy shadow-lg"
-          : "bg-brand-navy/95 backdrop-blur-sm"
+          ? "border-brass/40 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.7)]"
+          : "border-paper/10"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="flex items-center justify-between h-16 lg:h-[4.75rem]">
           {/* Logo */}
           <Link
             href="/"
@@ -73,12 +65,15 @@ export default function Header() {
               height={141}
               priority
               unoptimized
-              className="h-8 w-auto max-h-9 sm:h-9 sm:max-h-10 lg:h-10 lg:max-h-11 brightness-0 invert contrast-[1.08] drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]"
+              className="h-8 w-auto max-h-9 sm:h-9 lg:h-10 brightness-0 invert"
             />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+          <nav
+            className="hidden lg:flex items-center gap-1"
+            aria-label="Main navigation"
+          >
             {NAV_LINKS.map((link) => (
               <div
                 key={link.href}
@@ -88,10 +83,10 @@ export default function Header() {
               >
                 <Link
                   href={link.href}
-                  className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
-                    pathname.startsWith(link.href)
-                      ? "text-white bg-brand-slate"
-                      : "text-blue-100 hover:text-white hover:bg-brand-slate"
+                  className={`relative px-3.5 py-2 text-[0.9rem] font-medium tracking-wide transition-colors ${
+                    isActive(link.href)
+                      ? "text-paper"
+                      : "text-paper/70 hover:text-paper"
                   }`}
                   aria-haspopup={link.children ? "true" : undefined}
                   aria-expanded={
@@ -100,20 +95,30 @@ export default function Header() {
                 >
                   {link.label}
                   {link.children && (
-                    <span className="ml-1 text-xs" aria-hidden="true">▾</span>
+                    <span className="ml-1 text-[0.6rem] align-middle" aria-hidden="true">
+                      ▾
+                    </span>
+                  )}
+                  {isActive(link.href) && (
+                    <span
+                      className="absolute left-3.5 right-3.5 -bottom-px h-px bg-clay"
+                      aria-hidden="true"
+                    />
                   )}
                 </Link>
                 {link.children && openDropdown === link.href && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-1 z-50">
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-text-primary hover:bg-brand-blue-light hover:text-brand-blue transition-colors"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
+                  <div className="absolute top-full left-0 pt-2 w-56">
+                    <div className="card rounded-[5px] py-1.5 overflow-hidden shadow-[0_24px_50px_-28px_rgba(15,31,61,0.6)]">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block px-4 py-2.5 text-[0.875rem] text-body hover:bg-clay-soft hover:text-clay-deep transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -121,32 +126,29 @@ export default function Header() {
           </nav>
 
           {/* CTA */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-5">
             <a
-              href="tel:4438254050"
-              className="text-blue-100 text-sm hover:text-white transition-colors font-medium"
+              href={PHONE_HREF}
+              className="text-paper/75 text-[0.9rem] hover:text-paper transition-colors font-medium tracking-wide"
             >
-              (443) 825-4050
+              {PHONE_DISPLAY}
             </a>
-            <Link
-              href="/contact"
-              className="bg-brand-blue text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors"
-            >
+            <Link href="/contact" className="btn btn-clay text-[0.85rem] px-5 py-2.5">
               Request Appointment
             </Link>
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-2 text-white rounded"
+            className="lg:hidden p-2 text-paper rounded"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
           >
-            <span className="block w-6 h-0.5 bg-current mb-1.5 transition-all" aria-hidden="true" />
-            <span className="block w-6 h-0.5 bg-current mb-1.5 transition-all" aria-hidden="true" />
-            <span className="block w-6 h-0.5 bg-current transition-all" aria-hidden="true" />
+            <span className="block w-6 h-0.5 bg-current mb-1.5" aria-hidden="true" />
+            <span className="block w-6 h-0.5 bg-current mb-1.5" aria-hidden="true" />
+            <span className="block w-6 h-0.5 bg-current" aria-hidden="true" />
           </button>
         </div>
 
@@ -154,24 +156,24 @@ export default function Header() {
         {mobileOpen && (
           <nav
             id="mobile-menu"
-            className="lg:hidden pb-4 border-t border-brand-slate pt-4"
+            className="lg:hidden pb-5 border-t border-paper/10 pt-4"
             aria-label="Mobile navigation"
           >
             {NAV_LINKS.map((link) => (
               <div key={link.href}>
                 <Link
                   href={link.href}
-                  className="block px-2 py-2 text-blue-100 hover:text-white font-medium text-sm"
+                  className="block px-2 py-2.5 text-paper/85 hover:text-paper font-medium"
                 >
                   {link.label}
                 </Link>
                 {link.children && (
-                  <div className="ml-4 border-l border-brand-slate pl-3">
+                  <div className="ml-4 border-l border-paper/15 pl-4">
                     {link.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block py-1.5 text-blue-200 hover:text-white text-sm"
+                        className="block py-2 text-paper/60 hover:text-paper text-[0.9rem]"
                       >
                         {child.label}
                       </Link>
@@ -180,17 +182,11 @@ export default function Header() {
                 )}
               </div>
             ))}
-            <div className="mt-4 pt-4 border-t border-brand-slate flex flex-col gap-2">
-              <a
-                href="tel:4438254050"
-                className="block text-center bg-brand-teal text-white py-2 rounded-lg font-semibold text-sm"
-              >
-                Call (443) 825-4050
+            <div className="mt-5 pt-5 border-t border-paper/10 flex flex-col gap-2.5">
+              <a href={PHONE_HREF} className="btn btn-outline-light w-full">
+                Call {PHONE_DISPLAY}
               </a>
-              <Link
-                href="/contact"
-                className="block text-center bg-brand-blue text-white py-2 rounded-lg font-semibold text-sm"
-              >
+              <Link href="/contact" className="btn btn-clay w-full">
                 Request Appointment
               </Link>
             </div>

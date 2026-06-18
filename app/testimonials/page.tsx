@@ -7,6 +7,7 @@ import HeroSection from "@/components/HeroSection";
 import TestimonialCard from "@/components/TestimonialCard";
 import StickyCallBar from "@/components/StickyCallBar";
 import { testimonials } from "@/lib/data/testimonials";
+import { MAPS_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Patient Testimonials | Global Pain Management",
@@ -22,28 +23,25 @@ export default function TestimonialsPage() {
       <Header />
       <main id="main-content">
         <HeroSection
-          headline="What Our Patients Are Saying"
+          badge="Patient Stories"
+          headline="In our patients' own words"
           subheadline="Experience a world of difference — real stories from patients across Pasadena, Kent Island, and Anne Arundel County who trusted Global Pain Management with their care."
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
         />
 
-        <section className="bg-white py-16 lg:py-20" aria-labelledby="testimonials-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Patient Reviews
-              </span>
+        <section className="bg-paper py-16 lg:py-24" aria-labelledby="testimonials-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="max-w-2xl mb-12">
+              <p className="eyebrow mb-5">Patient Reviews</p>
               <h2
                 id="testimonials-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-4"
               >
-                Hundreds of Satisfied Patients
+                Hundreds of satisfied patients
               </h2>
-              <p className="text-text-muted max-w-2xl mx-auto leading-relaxed">
-                These are real stories from our community. We are grateful to
-                every patient who has trusted us with their care and taken time
-                to share their experience.
+              <p className="lead text-body">
+                These are real stories from our community. We are grateful to every patient
+                who has trusted us with their care and taken time to share their experience.
               </p>
             </div>
 
@@ -53,29 +51,23 @@ export default function TestimonialsPage() {
               ))}
             </div>
 
-            <div className="mt-16 bg-brand-cream rounded-2xl p-8 text-center">
-              <h2
-                className="text-2xl font-bold text-brand-navy mb-3"
-                style={{ fontFamily: "var(--font-montserrat)" }}
-              >
+            <div className="mt-14 bg-navy text-paper rounded-[6px] p-8 lg:p-10 text-center">
+              <h2 className="text-2xl lg:text-3xl text-paper mb-3">
                 Ready to experience a world of difference?
               </h2>
-              <p className="text-text-muted mb-6 max-w-xl mx-auto text-sm leading-relaxed">
-                Join the thousands of patients in our community who have found
-                meaningful relief through individualized pain management care.
+              <p className="text-paper/70 mb-7 max-w-xl mx-auto text-[0.97rem] leading-relaxed">
+                Join the thousands of patients in our community who have found meaningful
+                relief through individualized pain management care.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/contact"
-                  className="bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
-                >
+                <Link href="/contact" className="btn btn-clay">
                   Request Your Appointment
                 </Link>
                 <a
-                  href="https://www.google.com/maps?cid=12291003481097695559"
+                  href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-brand-blue text-brand-blue px-6 py-3 rounded-lg font-semibold hover:bg-brand-blue hover:text-white transition-colors text-sm"
+                  className="btn btn-outline-light"
                 >
                   Leave a Google Review
                 </a>

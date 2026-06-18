@@ -8,15 +8,29 @@ interface HeroSectionProps {
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   showTrustBadges?: boolean;
+  /** Eyebrow / dateline text */
   badge?: string;
-  /** Show a decorative visual panel on the right (default true for homepage) */
+  /** Show the framed office plate alongside the text (homepage) */
   showVisual?: boolean;
+}
+
+function Cta({ cta, kind }: { cta: { label: string; href: string }; kind: "primary" | "secondary" }) {
+  const cls = kind === "primary" ? "btn btn-clay" : "btn btn-outline";
+  return cta.href.startsWith("tel:") ? (
+    <a href={cta.href} className={cls}>
+      {cta.label}
+    </a>
+  ) : (
+    <Link href={cta.href} className={cls}>
+      {cta.label}
+    </Link>
+  );
 }
 
 export default function HeroSection({
   headline,
   subheadline,
-  primaryCta = { label: "Request Appointment", href: "/contact" },
+  primaryCta = { label: "Request an Appointment", href: "/contact" },
   secondaryCta,
   showTrustBadges = false,
   badge,
@@ -24,125 +38,66 @@ export default function HeroSection({
 }: HeroSectionProps) {
   return (
     <section
-      className="bg-brand-navy text-white py-20 lg:py-32 relative overflow-hidden"
-      aria-label="Hero"
+      className="relative bg-paper grain border-b border-line overflow-hidden"
+      aria-label="Introduction"
     >
-      {/* Background radial glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse at 75% 40%, rgba(42,110,187,0.18) 0%, transparent 65%)",
-        }}
-      />
-
-      {/* Decorative circles — top-right */}
-      <div
-        className="absolute -top-24 -right-24 w-96 h-96 rounded-full border border-brand-blue/10 pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -top-12 -right-12 w-64 h-64 rounded-full border border-brand-blue/10 pointer-events-none"
-        aria-hidden="true"
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className={`grid gap-12 items-center ${showVisual ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"}`}>
-          {/* Text */}
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10 py-16 lg:py-24 relative">
+        <div
+          className={`grid gap-12 lg:gap-16 items-center ${
+            showVisual ? "lg:grid-cols-[1.05fr_0.95fr]" : "grid-cols-1"
+          }`}
+        >
+          {/* Text column */}
           <div className={showVisual ? "" : "max-w-3xl"}>
             {badge && (
-              <div className="animate-fade-in inline-flex items-center bg-brand-blue/20 border border-brand-blue/30 text-brand-blue-light rounded-full px-4 py-1 text-sm font-medium mb-6">
-                {badge}
-              </div>
+              <p className="eyebrow animate-fade-rise mb-6">{badge}</p>
             )}
             <h1
-              className="animate-fade-in-up text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6"
-              style={{ fontFamily: "var(--font-montserrat)", animationDelay: "80ms" }}
+              className="animate-fade-rise delay-1 text-[2.6rem] leading-[1.05] sm:text-5xl lg:text-[3.85rem] lg:leading-[1.04] text-ink"
+              style={{ fontWeight: 560 }}
             >
               {headline}
             </h1>
-            <p
-              className="animate-fade-in-up text-lg sm:text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl"
-              style={{ animationDelay: "200ms" }}
-            >
+            <p className="animate-fade-rise delay-2 lead mt-7 max-w-xl text-body">
               {subheadline}
             </p>
-            <div
-              className="animate-fade-in-up flex flex-wrap gap-4"
-              style={{ animationDelay: "320ms" }}
-            >
-              {primaryCta.href.startsWith("tel:") ? (
-                <a
-                  href={primaryCta.href}
-                  className="inline-flex items-center bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-base shadow-lg"
-                >
-                  {primaryCta.label}
-                </a>
-              ) : (
-                <Link
-                  href={primaryCta.href}
-                  className="inline-flex items-center bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-base shadow-lg"
-                >
-                  {primaryCta.label}
-                </Link>
-              )}
-              {secondaryCta && (
-                <Link
-                  href={secondaryCta.href}
-                  className="inline-flex items-center border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-navy transition-colors text-base"
-                >
-                  {secondaryCta.label}
-                </Link>
-              )}
+            <div className="animate-fade-rise delay-3 mt-9 flex flex-wrap gap-4">
+              <Cta cta={primaryCta} kind="primary" />
+              {secondaryCta && <Cta cta={secondaryCta} kind="secondary" />}
             </div>
             {showTrustBadges && (
-              <div
-                className="animate-fade-in-up mt-10"
-                style={{ animationDelay: "440ms" }}
-              >
-                <TrustBadges variant="dark" />
+              <div className="animate-fade-rise delay-4 mt-12 pt-9 border-t border-line">
+                <TrustBadges variant="light" />
               </div>
             )}
           </div>
 
-          {/* Decorative visual panel */}
+          {/* Framed office plate */}
           {showVisual && (
-            <div
-              className="animate-slide-in-right hidden lg:flex items-center justify-center"
-              style={{ animationDelay: "200ms" }}
-              aria-hidden="true"
-            >
-              <div className="relative w-full max-w-md">
-                {/* Office aerial photo */}
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-brand-blue/20" style={{ aspectRatio: "4/3" }}>
-                  <Image
-                    src="/images/gpm-office-aerial.webp"
-                    alt="Aerial view of the Global Pain Management office at 8031 Ritchie Highway, Pasadena, MD"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 0vw, 28rem"
-                    className="object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-white text-sm font-semibold">Global Pain Management</p>
-                    <p className="text-blue-200 text-xs">8031 Ritchie Highway · Pasadena, MD</p>
-                  </div>
-                </div>
-
-                {/* Floating stat card — top left */}
-                <div className="absolute -top-4 -left-6 bg-white text-brand-navy rounded-xl p-4 shadow-xl border border-gray-100 animate-float" style={{ animationDelay: "1s" }}>
-                  <p className="text-2xl font-extrabold text-brand-blue" style={{ fontFamily: "var(--font-montserrat)" }}>12+</p>
-                  <p className="text-xs text-text-muted font-medium">Years Serving<br />Maryland</p>
-                </div>
-
-                {/* Floating stat card — bottom right */}
-                <div className="absolute -bottom-4 -right-6 bg-brand-teal text-white rounded-xl p-4 shadow-xl animate-float" style={{ animationDelay: "1.8s" }}>
-                  <p className="text-2xl font-extrabold" style={{ fontFamily: "var(--font-montserrat)" }}>★ 2024</p>
-                  <p className="text-xs text-teal-100 font-medium">Maryland<br />Top Doctor</p>
-                </div>
-              </div>
+            <div className="relative animate-fade-in delay-2 hidden lg:block" aria-hidden="false">
+              {/* offset panel for editorial depth */}
+              <div
+                className="absolute -right-5 -bottom-5 h-full w-full rounded-[5px] bg-sand"
+                aria-hidden="true"
+              />
+              <figure className="plate relative" style={{ aspectRatio: "4 / 3.2" }}>
+                <Image
+                  src="/images/gpm-office-aerial.webp"
+                  alt="Aerial view of the Global Pain Management office at 8031 Ritchie Highway, Pasadena, Maryland"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 0vw, 34rem"
+                  className="object-cover object-center"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 via-navy/55 to-transparent px-5 pb-4 pt-12">
+                  <p className="text-paper font-fraunces text-[1.05rem]" style={{ fontWeight: 560 }}>
+                    Our home on Ritchie Highway
+                  </p>
+                  <p className="plate-caption text-paper/70 mt-1">
+                    Pasadena, Maryland
+                  </p>
+                </figcaption>
+              </figure>
             </div>
           )}
         </div>

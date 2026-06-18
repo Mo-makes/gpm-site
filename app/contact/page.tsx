@@ -8,6 +8,14 @@ import ContactForm from "@/components/ContactForm";
 import InsuranceSection from "@/components/InsuranceSection";
 import OfficeHoursCard from "@/components/OfficeHoursCard";
 import StickyCallBar from "@/components/StickyCallBar";
+import {
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  FAX_DISPLAY,
+  ADDRESS,
+  MAPS_URL,
+  PATIENT_PORTAL_URL,
+} from "@/lib/site";
 
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
@@ -28,137 +36,104 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <PatientPortalBanner />
       <Header />
       <main id="main-content">
         <HeroSection
-          headline="Contact & Appointment Request"
-          subheadline="Experience a world of difference. Ready to take the first step toward pain relief? Fill out the form below or call us directly at (443) 825-4050. We typically respond within one business day."
-          primaryCta={{ label: "Call (443) 825-4050", href: "tel:4438254050" }}
+          badge="Contact & Appointments"
+          headline="Take the first step toward relief"
+          subheadline="Experience a world of difference. Fill out the form below or call us directly at (443) 825-4050. We typically respond within one business day."
+          primaryCta={{ label: `Call ${PHONE_DISPLAY}`, href: PHONE_HREF }}
         />
 
-        <section className="bg-white py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <section className="bg-paper py-16 lg:py-24">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_22rem] gap-12 lg:gap-16">
               {/* Form */}
-              <div className="lg:col-span-2">
-                <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                  Get in Touch
-                </span>
-                <h2
-                  className="text-2xl font-bold text-brand-navy mb-2"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
-                >
-                  Request an Appointment
+              <div>
+                <p className="eyebrow mb-5">Get in Touch</p>
+                <h2 className="text-3xl lg:text-[2.2rem] leading-[1.1] text-ink mb-3">
+                  Request an appointment
                 </h2>
-                <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                  Please fill out the form below and a member of our team will
-                  contact you to schedule your appointment. For urgent concerns,
-                  please call us directly.
+                <p className="text-body mb-8 leading-relaxed">
+                  Please fill out the form below and a member of our team will contact you
+                  to schedule your appointment. For urgent concerns, please call us
+                  directly.
                 </p>
                 <ContactForm />
               </div>
 
               {/* Sidebar */}
-              <div className="space-y-6">
-                {/* Address */}
-                <div className="bg-brand-cream rounded-xl overflow-hidden">
+              <aside className="space-y-6">
+                <div className="card overflow-hidden">
                   <div className="relative aspect-[16/9] w-full">
                     <Image
                       src="/images/gpm-office-aerial.webp"
                       alt="Global Pain Management office building in Pasadena, MD"
                       fill
-                      sizes="(max-width: 1024px) 100vw, 20rem"
+                      sizes="(max-width: 1024px) 100vw, 22rem"
                       className="object-cover object-center"
                     />
                   </div>
                   <div className="p-6">
-                  <div className="mb-5 flex justify-center rounded-lg border border-gray-200 bg-white px-5 py-4 shadow-sm">
-                    <Image
-                      src="/global-logo.svg"
-                      alt="Global Pain Management — GLOBAL"
-                      width={674}
-                      height={141}
-                      unoptimized
-                      className="h-12 w-auto max-w-full sm:h-14"
-                    />
-                  </div>
-                  <h2
-                    className="font-bold text-brand-navy text-base mb-4"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    Our Office
-                  </h2>
-                  <address className="not-italic text-sm text-text-primary space-y-2 leading-relaxed">
-                    <p className="font-semibold">Global Pain Management</p>
-                    <p>8031 Ritchie Highway, Suite 100</p>
-                    <p>Pasadena, MD 21122</p>
-                    <div className="mt-4 space-y-1.5">
+                    <p className="eyebrow mb-4">Our Office</p>
+                    <address className="not-italic text-[0.95rem] text-body space-y-1.5 leading-relaxed">
+                      <p className="font-fraunces text-lg text-ink" style={{ fontWeight: 560 }}>
+                        Global Pain Management
+                      </p>
+                      <p>{ADDRESS.line1}</p>
                       <p>
-                        <a
-                          href="tel:4438254050"
-                          className="text-brand-blue font-semibold hover:underline"
-                        >
-                          (443) 825-4050
-                        </a>
+                        {ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}
                       </p>
-                      <p className="text-text-muted text-xs">
-                        Fax: (443) 825-4051
-                      </p>
-                    </div>
-                  </address>
-
-                  <div className="mt-4 flex flex-col gap-2">
+                      <div className="pt-3 space-y-1">
+                        <p>
+                          <a href={PHONE_HREF} className="text-clay-deep font-semibold hover:underline">
+                            {PHONE_DISPLAY}
+                          </a>
+                        </p>
+                        <p className="text-muted text-[0.85rem]">Fax: {FAX_DISPLAY}</p>
+                      </div>
+                    </address>
                     <a
-                      href="https://www.google.com/maps?cid=12291003481097695559"
+                      href={MAPS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block text-center border border-brand-blue text-brand-blue py-2 rounded-lg text-sm font-semibold hover:bg-brand-blue hover:text-white transition-colors"
+                      className="btn btn-outline w-full text-[0.85rem] py-2.5 mt-5"
                     >
                       Get Directions
                     </a>
                   </div>
-                  </div>
                 </div>
 
-                {/* Office Hours */}
                 <OfficeHoursCard />
 
-                {/* Patient Portal */}
-                <div className="bg-brand-teal text-white rounded-xl p-6">
-                  <h2
-                    className="font-bold text-lg mb-2"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    Existing Patient?
-                  </h2>
-                  <p className="text-teal-100 text-sm mb-4 leading-relaxed">
-                    Access your health records, view visit summaries, and more
-                    through our secure patient portal.
+                <div className="bg-sage-soft border border-sage/25 rounded-[5px] p-6">
+                  <p className="font-fraunces text-lg text-sage-deep mb-2" style={{ fontWeight: 560 }}>
+                    Existing patient?
+                  </p>
+                  <p className="text-body text-[0.9rem] mb-4 leading-relaxed">
+                    Access your health records, view visit summaries, and more through our
+                    secure patient portal.
                   </p>
                   <a
-                    href="https://www.yourhealthfile.com/portal/login.jsp"
+                    href={PATIENT_PORTAL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full text-center bg-white text-brand-teal py-2.5 rounded-lg font-semibold text-sm hover:bg-teal-50 transition-colors"
+                    className="btn btn-navy w-full text-[0.85rem] py-2.5"
                   >
                     Access Patient Portal
                   </a>
                 </div>
-              </div>
+              </aside>
             </div>
 
             {/* Map */}
-            <div className="mt-12 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+            <div className="mt-12 plate" style={{ aspectRatio: "21 / 7" }}>
               <iframe
                 title="Global Pain Management office location"
                 src="https://maps.google.com/maps?q=8031+Ritchie+Hwy+Suite+100+Pasadena+MD+21122&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="350"
+                className="w-full h-full"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"

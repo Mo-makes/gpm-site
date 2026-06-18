@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const FULL_LOGO_SRC = "/global-logo.svg";
+import {
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  FAX_DISPLAY,
+  ADDRESS,
+  PATIENT_PORTAL_URL,
+  MAPS_URL,
+  FACEBOOK_URL,
+} from "@/lib/site";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -11,7 +18,7 @@ const quickLinks = [
   { label: "Procedures", href: "/procedures" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "Contact Us", href: "/contact" },
-  { label: "Patient Portal", href: "https://www.yourhealthfile.com/portal/login.jsp", external: true },
+  { label: "Patient Portal", href: PATIENT_PORTAL_URL, external: true },
   { label: "Privacy Policy", href: "/privacy-policy" },
 ];
 
@@ -23,93 +30,84 @@ const serviceAreas = [
   "Anne Arundel County",
   "Queen Anne's County",
   "Howard County",
-  "Surrounding Maryland Areas",
+  "Surrounding Maryland",
 ];
+
+function ColumnHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-hanken text-brass text-[0.72rem] font-semibold uppercase tracking-[0.22em] mb-5">
+      {children}
+    </h2>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-navy text-blue-100" role="contentinfo">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Column 1 — Contact Info */}
-          <div>
-            <div className="mb-6 rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-lg">
+    <footer className="bg-navy text-paper/70" role="contentinfo">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10 py-14 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
+          {/* Contact */}
+          <div className="md:col-span-5">
+            <div className="mb-6 inline-flex rounded-[4px] border border-line-strong bg-paper px-5 py-4">
               <Image
-                src={FULL_LOGO_SRC}
-                alt="Global Pain Management — GLOBAL"
+                src="/global-logo.svg"
+                alt="Global Pain Management"
                 width={674}
                 height={141}
                 unoptimized
-                className="mx-auto h-[52px] w-auto max-w-full sm:h-[58px]"
+                className="h-[50px] w-auto sm:h-[56px]"
               />
             </div>
             <p
-              className="text-white font-bold text-lg mb-1"
-              style={{ fontFamily: "var(--font-montserrat)" }}
+              className="font-fraunces italic text-brass text-lg mb-5"
+              style={{ fontWeight: 500 }}
             >
-              Global Pain Management
+              Experience a world of difference.
             </p>
-            <p className="text-brand-blue-light text-sm italic mt-1 mb-4">
-              Experience a world of difference
-            </p>
-            <address className="not-italic text-sm space-y-2 leading-relaxed">
-              <p>8031 Ritchie Highway, Suite 100</p>
-              <p>Pasadena, MD 21122</p>
-              <p className="mt-3">
-                <a
-                  href="tel:4438254050"
-                  className="hover:text-white transition-colors font-medium"
-                >
-                  Phone: (443) 825-4050
-                </a>
-              </p>
+            <address className="not-italic text-[0.95rem] space-y-1.5 leading-relaxed text-paper/75">
+              <p>{ADDRESS.line1}</p>
               <p>
-                <span className="text-blue-300">Fax: (443) 825-4051</span>
+                {ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}
               </p>
+              <p className="pt-3">
+                <a
+                  href={PHONE_HREF}
+                  className="hover:text-paper transition-colors font-medium"
+                >
+                  {PHONE_DISPLAY}
+                </a>
+                <span className="text-paper/40"> · phone</span>
+              </p>
+              <p className="text-paper/55 text-[0.875rem]">{FAX_DISPLAY} · fax</p>
             </address>
 
-            {/* Office Hours */}
-            <div className="mt-5 text-sm space-y-1">
-              <p className="text-white font-semibold text-xs uppercase tracking-widest mb-2">
-                Office Hours
-              </p>
-              <p>Monday – Friday: 8:30 AM – 4:30 PM</p>
-              <p>Saturday – Sunday: Closed</p>
-            </div>
-
-            {/* Social */}
-            <div className="mt-5 flex gap-3">
+            <div className="mt-6 flex items-center gap-4 text-[0.85rem]">
               <a
-                href="https://www.facebook.com/GlobalPainMD/"
+                href={FACEBOOK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-300 hover:text-white transition-colors text-sm font-medium"
-                aria-label="Global Pain Management on Facebook"
+                className="text-paper/60 hover:text-paper transition-colors font-medium"
               >
                 Facebook
               </a>
-              <span aria-hidden="true" className="text-brand-slate">|</span>
+              <span aria-hidden="true" className="text-paper/25">
+                /
+              </span>
               <a
-                href="https://www.google.com/maps?cid=12291003481097695559"
+                href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-300 hover:text-white transition-colors text-sm font-medium"
-                aria-label="Global Pain Management on Google Maps"
+                className="text-paper/60 hover:text-paper transition-colors font-medium"
               >
                 Google Maps
               </a>
             </div>
           </div>
 
-          {/* Column 2 — Quick Links */}
-          <div>
-            <h2
-              className="text-white font-bold text-sm uppercase tracking-widest mb-4"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
-              Quick Links
-            </h2>
-            <ul className="space-y-2 text-sm">
+          {/* Quick links */}
+          <div className="md:col-span-3">
+            <ColumnHeading>Explore</ColumnHeading>
+            <ul className="space-y-2.5 text-[0.95rem]">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   {link.external ? (
@@ -117,14 +115,14 @@ export default function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-white transition-colors"
+                      className="text-paper/70 hover:text-paper transition-colors"
                     >
                       {link.label}
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="hover:text-white transition-colors"
+                      className="text-paper/70 hover:text-paper transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -134,35 +132,36 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3 — Service Areas */}
-          <div>
-            <h2
-              className="text-white font-bold text-sm uppercase tracking-widest mb-4"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
-              Areas We Serve
-            </h2>
-            <ul className="space-y-2 text-sm">
+          {/* Service areas */}
+          <div className="md:col-span-4">
+            <ColumnHeading>Areas We Serve</ColumnHeading>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 text-[0.95rem]">
               {serviceAreas.map((area) => (
-                <li key={area} className="flex items-center gap-2">
-                  <span className="text-brand-teal" aria-hidden="true">✓</span>
+                <li key={area} className="flex items-center gap-2.5 text-paper/70">
+                  <span className="text-sage h-1 w-1 rounded-full bg-current shrink-0" aria-hidden="true" />
                   {area}
                 </li>
               ))}
             </ul>
+            <div className="mt-7 hidden md:block">
+              <p className="font-hanken text-brass text-[0.72rem] font-semibold uppercase tracking-[0.22em] mb-2">
+                Office Hours
+              </p>
+              <p className="text-paper/70 text-[0.95rem]">
+                Monday – Friday · 8:30 AM – 4:30 PM
+              </p>
+              <p className="text-paper/50 text-[0.875rem]">Saturday – Sunday · Closed</p>
+            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-brand-slate flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-300">
+        <div className="mt-14 pt-6 border-t border-paper/12 flex flex-col sm:flex-row items-center justify-between gap-3 text-[0.8rem] text-paper/45">
           <p>
-            © {new Date().getFullYear()} Global Pain Management. All rights
-            reserved.
+            © {new Date().getFullYear()} Global Pain Management. All rights reserved.
           </p>
           <p>
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
+            Independent &amp; locally owned in Pasadena, Maryland since 2013.
           </p>
         </div>
       </div>

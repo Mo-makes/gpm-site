@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import TelemedicineSection from "@/components/TelemedicineSection";
 import StickyCallBar from "@/components/StickyCallBar";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Global Pain Management | Pasadena, MD",
@@ -30,107 +31,92 @@ const milestones = [
   },
   {
     year: "2013",
-    text: "Practice expands its interventional services, adding radiofrequency ablation and advanced spinal injection techniques.",
+    text: "The practice expands its interventional services, adding radiofrequency ablation and advanced spinal injection techniques.",
   },
   {
     year: "2018",
-    text: "Telemedicine program launched for established patients, improving access for patients across Anne Arundel and surrounding counties.",
+    text: "Telemedicine launches for established patients, improving access across Anne Arundel and surrounding counties.",
   },
   {
     year: "2024",
-    text: "Recognized as a Maryland Top Doctor practice. Team grows to three dedicated providers serving thousands of patients annually.",
+    text: "Recognized as a Maryland Top Doctor practice. The team grows to three dedicated providers serving thousands of patients annually.",
   },
 ];
 
 const values = [
   {
-    title: "Patient-First Care",
-    body: "We listen before we prescribe. Every treatment plan begins with a thorough understanding of your unique pain experience, goals, and lifestyle.",
+    title: "Patient-first care",
+    body: "We listen before we prescribe. Every plan begins with a thorough understanding of your pain, your goals, and your life.",
   },
   {
-    title: "Evidence-Based Medicine",
-    body: "We combine proven interventional techniques with current research to offer our patients the most effective, minimally invasive options available.",
+    title: "Evidence-based medicine",
+    body: "We combine proven interventional techniques with current research to offer the most effective, minimally invasive options available.",
   },
   {
-    title: "Community Commitment",
-    body: "As a locally owned, independent practice, we are accountable to our patients and our community — not a health system or corporate parent.",
+    title: "Community commitment",
+    body: "As an independent practice, we are accountable to our patients and our community — not a health system or corporate parent.",
   },
   {
-    title: "Whole-Person Approach",
-    body: "Pain affects every dimension of life. We address physical, functional, and quality-of-life goals together, coordinating with your full care team.",
+    title: "Whole-person approach",
+    body: "Pain affects every dimension of life. We address physical, functional, and quality-of-life goals together with your full care team.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <PatientPortalBanner />
       <Header />
       <main id="main-content">
         <HeroSection
-          headline="About Global Pain Management"
-          subheadline="Experience a world of difference. Founded in 2013, we have been the region's trusted independent pain management practice — serving patients in Pasadena, Kent Island, Columbia, and across Maryland with board-certified, compassionate care."
+          badge="About the Practice"
+          headline="The region's most trusted independent pain practice"
+          subheadline="Experience a world of difference. Founded in 2013, we have served patients in Pasadena, Kent Island, Columbia, and across Maryland with board-certified, compassionate care."
           primaryCta={{ label: "Meet Our Team", href: "/about/team" }}
           secondaryCta={{ label: "Request Appointment", href: "/contact" }}
         />
 
         {/* Mission */}
-        <section className="bg-white py-16 lg:py-20" aria-labelledby="mission-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section className="bg-paper py-16 lg:py-24" aria-labelledby="mission-heading">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               <div>
-                <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                  Our Mission
-                </span>
+                <p className="eyebrow mb-5">Our Mission</p>
                 <h2
                   id="mission-heading"
-                  className="text-3xl lg:text-4xl font-bold text-brand-navy mb-6"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
+                  className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-6"
                 >
-                  Pain Management That Centers You
+                  Pain management that centers you
                 </h2>
-                <div className="space-y-4 text-text-muted leading-relaxed">
-                  <p>
-                    Chronic and acute pain can strip away independence, comfort,
-                    and joy. At Global Pain Management, we exist to help our
-                    patients get those things back. Since our founding in 2013,
-                    our mission has been unchanged: provide expert, individualized
-                    pain care in a setting where every patient feels heard,
-                    respected, and supported.
+                <div className="space-y-4 text-body leading-relaxed">
+                  <p className="lead text-body dropcap">
+                    Chronic and acute pain can strip away independence, comfort, and joy.
+                    At Global Pain Management, we exist to help our patients get those
+                    things back.
                   </p>
                   <p>
-                    Dr. Haddi Ogunsola founded this practice because she believed
-                    that the communities of Anne Arundel County deserved access
-                    to the kind of board-certified, interventional pain care
-                    typically found only at large academic centers. More than
-                    fifteen years later, that belief drives everything we do.
+                    Dr. Haddi Ogunsola founded this practice because she believed the
+                    communities of Anne Arundel County deserved access to the kind of
+                    board-certified, interventional pain care typically found only at
+                    large academic centers. More than a decade later, that belief drives
+                    everything we do.
                   </p>
                   <p>
-                    We treat conditions ranging from everyday back and neck pain
-                    to complex chronic conditions, workers&apos; compensation
-                    injuries, auto accident trauma, and cancer pain. Whatever
-                    brought you to us, we are committed to building a plan that
-                    meets you where you are.
+                    We treat conditions ranging from everyday back and neck pain to complex
+                    chronic conditions, workers&apos; compensation injuries, auto accident
+                    trauma, and cancer pain. Whatever brought you to us, we are committed to
+                    building a plan that meets you where you are.
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 self-start">
                 {values.map((v) => (
-                  <div
-                    key={v.title}
-                    className="bg-brand-cream rounded-xl p-5 border-l-4 border-brand-blue"
-                  >
-                    <h3
-                      className="font-bold text-brand-navy mb-2 text-sm"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
+                  <div key={v.title} className="card p-6">
+                    <h3 className="font-fraunces text-[1.15rem] text-ink mb-2.5" style={{ fontWeight: 560 }}>
                       {v.title}
                     </h3>
-                    <p className="text-xs text-text-muted leading-relaxed">{v.body}</p>
+                    <p className="text-[0.9rem] text-body leading-relaxed">{v.body}</p>
                   </div>
                 ))}
               </div>
@@ -139,31 +125,28 @@ export default function AboutPage() {
         </section>
 
         {/* Timeline */}
-        <section className="bg-brand-cream py-16 lg:py-20" aria-labelledby="history-heading">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block bg-brand-blue-light text-brand-blue text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Our History
-              </span>
+        <section className="bg-sand py-16 lg:py-24" aria-labelledby="history-heading">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <p className="eyebrow mb-5">Our History</p>
               <h2
                 id="history-heading"
-                className="text-3xl lg:text-4xl font-bold text-brand-navy"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink"
               >
-                Building a Practice, Building Trust
+                Building a practice, building trust
               </h2>
             </div>
-            <ol className="relative border-l-2 border-brand-blue/30 space-y-10 pl-6">
-              {milestones.map((m) => (
-                <li key={m.year} className="relative">
-                  <span className="absolute -left-[29px] w-4 h-4 rounded-full bg-brand-blue border-4 border-brand-blue-light" aria-hidden="true" />
-                  <p
-                    className="text-brand-blue font-bold text-lg mb-1"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
+            <ol className="relative border-l border-line-strong space-y-9 pl-8">
+              {milestones.map((m, i) => (
+                <li key={i} className="relative">
+                  <span
+                    className="absolute -left-[37px] top-1 w-3.5 h-3.5 rounded-full bg-clay ring-4 ring-sand"
+                    aria-hidden="true"
+                  />
+                  <p className="font-fraunces text-brass text-xl mb-1" style={{ fontWeight: 500 }}>
                     {m.year}
                   </p>
-                  <p className="text-text-muted leading-relaxed text-sm">{m.text}</p>
+                  <p className="text-body leading-relaxed text-[0.97rem]">{m.text}</p>
                 </li>
               ))}
             </ol>
@@ -174,31 +157,21 @@ export default function AboutPage() {
         <TelemedicineSection />
 
         {/* CTA */}
-        <section className="bg-brand-navy text-white py-16" aria-labelledby="about-cta-heading">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2
-              id="about-cta-heading"
-              className="text-3xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
-              Ready to Start Your Pain Management Journey?
+        <section className="bg-navy text-paper py-16 lg:py-20">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl lg:text-[2.4rem] leading-[1.1] text-paper mb-4">
+              Ready to start your pain management journey?
             </h2>
-            <p className="text-blue-100 mb-8 leading-relaxed">
-              Our team is accepting new patients. Contact us today to schedule
-              your comprehensive pain evaluation.
+            <p className="text-paper/75 mb-8 leading-relaxed">
+              Our team is accepting new patients. Contact us today to schedule your
+              comprehensive pain evaluation.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-              >
+              <Link href="/contact" className="btn btn-clay">
                 Request Appointment
               </Link>
-              <a
-                href="tel:4438254050"
-                className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-navy transition-colors"
-              >
-                Call (443) 825-4050
+              <a href={PHONE_HREF} className="btn btn-outline-light">
+                Call {PHONE_DISPLAY}
               </a>
             </div>
           </div>

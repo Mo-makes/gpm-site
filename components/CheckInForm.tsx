@@ -86,28 +86,26 @@ export default function CheckInForm() {
   }, [submitted, countdown]);
 
   return (
-    <div className="relative flex min-h-dvh flex-col bg-brand-cream">
-      <header className="shrink-0 border-b border-brand-blue/10 bg-white px-4 py-4 sm:px-6">
+    <div className="relative flex min-h-dvh flex-col bg-paper">
+      <header className="shrink-0 border-b border-line bg-paper-raised px-4 py-4 sm:px-6">
         <div className="mx-auto flex max-w-5xl items-center justify-center gap-4">
-          <Image
-            src="/global-logo.svg"
-            alt="Global Pain Management"
-            width={180}
-            height={48}
-            priority
-            className="h-10 w-auto sm:h-12"
-          />
-          <div className="hidden h-8 w-px bg-brand-blue/20 sm:block" aria-hidden />
+          <span className="flex items-center rounded-[4px] bg-navy px-3 py-2">
+            <Image
+              src="/global-logo.svg"
+              alt="Global Pain Management"
+              width={180}
+              height={48}
+              priority
+              unoptimized
+              className="h-8 w-auto brightness-0 invert sm:h-9"
+            />
+          </span>
+          <div className="hidden h-9 w-px bg-line-strong sm:block" aria-hidden />
           <div className="text-center sm:text-left">
-            <p
-              className="text-lg font-bold text-brand-navy sm:text-xl"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
+            <p className="font-fraunces text-lg text-ink sm:text-xl" style={{ fontWeight: 560 }}>
               Patient Check-In
             </p>
-            <p className="text-sm text-text-muted">
-              Please complete the form below
-            </p>
+            <p className="text-sm text-muted">Please complete the form below</p>
           </div>
         </div>
       </header>
@@ -124,51 +122,44 @@ export default function CheckInForm() {
 
         {submitted && (
           <div
-            className="absolute inset-0 z-20 flex items-center justify-center bg-brand-navy/85 px-6 backdrop-blur-sm"
+            className="absolute inset-0 z-20 flex items-center justify-center bg-navy/90 px-6"
             role="alertdialog"
             aria-live="assertive"
             aria-labelledby="check-in-success-title"
             aria-describedby="check-in-success-desc"
           >
-            <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-2xl animate-scale-in">
-              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-brand-teal/10">
+            <div className="w-full max-w-md rounded-[6px] bg-paper-raised p-8 text-center shadow-2xl animate-fade-in">
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-sage-soft">
                 <svg
-                  className="h-8 w-8 text-brand-teal"
+                  className="h-8 w-8 text-sage-deep"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2.5}
                   aria-hidden
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 13l4 4L19 7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
 
               <h2
                 id="check-in-success-title"
-                className="mb-2 text-2xl font-bold text-brand-navy"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="mb-2 font-fraunces text-2xl text-ink"
+                style={{ fontWeight: 560 }}
               >
-                Check-In Complete
+                Check-in complete
               </h2>
-              <p id="check-in-success-desc" className="mb-6 text-text-muted">
+              <p id="check-in-success-desc" className="mb-6 text-body">
                 Thank you. The next patient can check in shortly.
               </p>
 
               <div
-                className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue text-4xl font-bold text-white"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-clay font-fraunces text-4xl text-paper"
                 aria-label={`Refreshing in ${countdown} seconds`}
               >
                 {countdown}
               </div>
-              <p className="mt-4 text-sm text-text-muted">
-                Preparing form for next patient…
-              </p>
+              <p className="mt-4 text-sm text-muted">Preparing form for next patient…</p>
             </div>
           </div>
         )}

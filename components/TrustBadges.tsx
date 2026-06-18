@@ -2,40 +2,36 @@ interface TrustBadgesProps {
   variant?: "dark" | "light";
 }
 
-const badges = [
-  { label: "FindaTopDoc", detail: "Recognized Provider" },
-  { label: "Women in Medicine", detail: "Member Practice" },
-  { label: "Maryland Top Doctor", detail: "2024" },
-  { label: "Board Certified", detail: "Pain Management" },
+const credentials = [
+  { value: "Maryland Top Doctor", detail: "Castle Connolly · 2024" },
+  { value: "Dual Board-Certified", detail: "Pain Medicine & Anesthesiology" },
+  { value: "Fellowship-Trained", detail: "UMD Shock Trauma" },
+  { value: "Women in Medicine", detail: "Honoree · 2023" },
 ];
 
 export default function TrustBadges({ variant = "light" }: TrustBadgesProps) {
-  const isDark = variant === "dark";
+  const dark = variant === "dark";
+  const value = dark ? "text-paper" : "text-ink";
+  const detail = dark ? "text-paper/55" : "text-muted";
 
   return (
-    <div className="flex flex-wrap gap-3" role="list" aria-label="Credentials and recognitions">
-      {badges.map((badge) => (
-        <div
-          key={badge.label}
-          role="listitem"
-          className={`inline-flex flex-col items-center px-4 py-2 rounded-lg border text-center ${
-            isDark
-              ? "border-brand-blue/40 bg-brand-blue/10 text-blue-100"
-              : "border-brand-blue/30 bg-brand-blue-light text-brand-navy"
-          }`}
-        >
-          <span className="text-xs font-bold uppercase tracking-wide">
-            {badge.label}
-          </span>
-          <span
-            className={`text-xs mt-0.5 ${
-              isDark ? "text-blue-300" : "text-text-muted"
-            }`}
+    <dl
+      className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5"
+      aria-label="Credentials and recognitions"
+    >
+      {credentials.map((c) => (
+        <div key={c.value} className="flex flex-col border-l-2 border-clay/40 pl-4">
+          <dt
+            className={`font-fraunces text-[1rem] leading-tight ${value}`}
+            style={{ fontWeight: 560 }}
           >
-            {badge.detail}
-          </span>
+            {c.value}
+          </dt>
+          <dd className={`mt-0.5 text-[0.72rem] uppercase tracking-[0.11em] ${detail}`}>
+            {c.detail}
+          </dd>
         </div>
       ))}
-    </div>
+    </dl>
   );
 }

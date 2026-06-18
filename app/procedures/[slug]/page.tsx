@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyCallBar from "@/components/StickyCallBar";
 import { procedures } from "@/lib/data/procedures";
+import { PHONE_DISPLAY, PHONE_HREF, ADDRESS } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -46,11 +47,14 @@ export default async function ProcedurePage({ params }: Props) {
       <PatientPortalBanner />
       <Header />
       <main id="main-content">
-        {/* Hero */}
-        <div className="bg-brand-navy text-white py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2 text-brand-blue-light text-sm mb-2">
-              <Link href="/procedures" className="hover:text-white transition-colors">
+        {/* Masthead */}
+        <div className="bg-navy text-paper py-16 lg:py-20">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <nav
+              className="flex items-center gap-2 text-paper/55 text-[0.82rem] mb-5"
+              aria-label="Breadcrumb"
+            >
+              <Link href="/procedures" className="hover:text-paper transition-colors">
                 Procedures
               </Link>
               {parentProcedure && (
@@ -58,189 +62,134 @@ export default async function ProcedurePage({ params }: Props) {
                   <span aria-hidden="true">›</span>
                   <Link
                     href={`/procedures/${parentProcedure.slug}`}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-paper transition-colors"
                   >
                     {parentProcedure.name}
                   </Link>
                 </>
               )}
-            </div>
-            <p className="text-blue-200/90 text-sm italic mb-3 max-w-2xl">
-              Experience a world of difference
-            </p>
-            <h1
-              className="text-3xl lg:text-5xl font-extrabold max-w-3xl"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
+            </nav>
+            <h1 className="text-4xl lg:text-[3.2rem] leading-[1.06] text-paper max-w-3xl">
               {procedure.name}
             </h1>
-            <p className="mt-4 text-blue-100 text-lg max-w-2xl leading-relaxed">
+            <p className="mt-5 text-paper/75 text-lg max-w-2xl leading-relaxed">
               {procedure.shortDescription}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/contact"
-                className="bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
-              >
+              <Link href="/contact" className="btn btn-clay">
                 Request Appointment
               </Link>
-              <a
-                href="tel:4438254050"
-                className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-navy transition-colors text-sm"
-              >
-                Call (443) 825-4050
+              <a href={PHONE_HREF} className="btn btn-outline-light">
+                Call {PHONE_DISPLAY}
               </a>
             </div>
           </div>
         </div>
 
-        {/* Content */}
-        <section className="bg-white py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              {/* Main content */}
-              <div className="lg:col-span-2 space-y-10">
+        <section className="bg-paper py-16 lg:py-24">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-12 lg:gap-16">
+              {/* Article */}
+              <article className="max-w-2xl">
                 {procedure.fullDescription && (
-                  <div>
-                    <h2
-                      className="text-2xl font-bold text-brand-navy mb-4"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
-                      About This Procedure
+                  <>
+                    <h2 className="text-[1.7rem] text-ink mb-4" style={{ fontWeight: 560 }}>
+                      About this procedure
                     </h2>
-                    <p className="text-text-muted leading-relaxed">
-                      {procedure.fullDescription}
-                    </p>
-                  </div>
+                    <p className="lead text-body dropcap">{procedure.fullDescription}</p>
+                  </>
                 )}
 
                 {procedure.benefits && procedure.benefits.length > 0 && (
-                  <div>
-                    <h2
-                      className="text-2xl font-bold text-brand-navy mb-4"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
+                  <>
+                    <h2 className="text-[1.7rem] text-ink mt-12 mb-5" style={{ fontWeight: 560 }}>
                       Benefits
                     </h2>
-                    <ul className="space-y-3">
+                    <ul className="border-t border-line">
                       {procedure.benefits.map((b) => (
                         <li
                           key={b}
-                          className="flex items-start gap-3 text-text-muted text-sm"
+                          className="flex items-start gap-3 py-3 border-b border-line text-body text-[0.97rem]"
                         >
-                          <span
-                            className="text-brand-teal font-bold mt-0.5 flex-shrink-0"
-                            aria-hidden="true"
-                          >
+                          <span className="text-sage-deep mt-0.5 shrink-0" aria-hidden="true">
                             ✓
                           </span>
                           {b}
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </>
                 )}
 
                 {procedure.whatToExpect && (
-                  <div>
-                    <h2
-                      className="text-2xl font-bold text-brand-navy mb-4"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
-                      What to Expect
+                  <>
+                    <h2 className="text-[1.7rem] text-ink mt-12 mb-4" style={{ fontWeight: 560 }}>
+                      What to expect
                     </h2>
-                    <p className="text-text-muted leading-relaxed">
-                      {procedure.whatToExpect}
-                    </p>
-                  </div>
+                    <p className="text-body leading-relaxed">{procedure.whatToExpect}</p>
+                  </>
                 )}
 
                 {/* CTA */}
-                <div className="bg-brand-cream rounded-2xl p-8">
-                  <h2
-                    className="text-xl font-bold text-brand-navy mb-3"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    Is {procedure.name} Right for You?
+                <div className="card p-8 mt-12">
+                  <h2 className="text-xl text-ink mb-3" style={{ fontWeight: 560 }}>
+                    Is {procedure.name.toLowerCase()} right for you?
                   </h2>
-                  <p className="text-text-muted text-sm mb-6 leading-relaxed">
-                    Schedule a comprehensive evaluation with our team to
-                    determine whether this procedure is appropriate for your
-                    condition and goals.
+                  <p className="text-body text-[0.95rem] mb-6 leading-relaxed">
+                    Schedule a comprehensive evaluation with our team to determine whether
+                    this procedure is appropriate for your condition and goals.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Link
-                      href="/contact"
-                      className="bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
-                    >
+                    <Link href="/contact" className="btn btn-clay">
                       Request Appointment
                     </Link>
-                    <a
-                      href="tel:4438254050"
-                      className="border-2 border-brand-blue text-brand-blue px-6 py-3 rounded-lg font-semibold hover:bg-brand-blue hover:text-white transition-colors text-sm"
-                    >
-                      Call (443) 825-4050
+                    <a href={PHONE_HREF} className="btn btn-outline">
+                      Call {PHONE_DISPLAY}
                     </a>
                   </div>
                 </div>
-              </div>
+              </article>
 
               {/* Sidebar */}
-              <div className="space-y-6">
-                <div className="bg-brand-navy text-white rounded-xl p-6">
-                  <h3
-                    className="font-bold text-lg mb-3"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    Schedule at Our Office
-                  </h3>
-                  <address className="not-italic text-blue-100 text-sm space-y-1 leading-relaxed mb-4">
-                    <p>8031 Ritchie Highway</p>
-                    <p>Suite 100</p>
-                    <p>Pasadena, MD 21122</p>
+              <aside className="space-y-6 lg:sticky lg:top-28 self-start">
+                <div className="bg-navy text-paper rounded-[5px] p-6">
+                  <p className="eyebrow eyebrow--light mb-4">Schedule at Our Office</p>
+                  <address className="not-italic text-paper/80 text-[0.92rem] space-y-1 leading-relaxed mb-5">
+                    <p>{ADDRESS.line1}</p>
+                    <p>
+                      {ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}
+                    </p>
                   </address>
-                  <Link
-                    href="/contact"
-                    className="block w-full text-center bg-brand-blue text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors"
-                  >
+                  <Link href="/contact" className="btn btn-clay w-full text-[0.85rem] py-2.5">
                     Request Appointment
                   </Link>
-                  <a
-                    href="tel:4438254050"
-                    className="block w-full text-center border border-white text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-white hover:text-brand-navy transition-colors mt-2"
-                  >
-                    (443) 825-4050
+                  <a href={PHONE_HREF} className="btn btn-outline-light w-full text-[0.85rem] py-2.5 mt-2.5">
+                    {PHONE_DISPLAY}
                   </a>
                 </div>
 
                 {parentProcedure && (
-                  <div className="bg-brand-cream rounded-xl p-6">
-                    <h3
-                      className="font-bold text-brand-navy text-base mb-3"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
-                      Part of Our {parentProcedure.name} Program
-                    </h3>
-                    <p className="text-text-muted text-sm leading-relaxed mb-3">
+                  <div className="card p-6">
+                    <p className="eyebrow mb-3">Part of Our Program</p>
+                    <p className="font-fraunces text-[1.05rem] text-ink mb-2" style={{ fontWeight: 560 }}>
+                      {parentProcedure.name}
+                    </p>
+                    <p className="text-body text-[0.9rem] leading-relaxed mb-3">
                       {parentProcedure.shortDescription}
                     </p>
                     <Link
                       href={`/procedures/${parentProcedure.slug}`}
-                      className="text-sm text-brand-blue font-semibold hover:underline"
+                      className="link-arrow text-[0.85rem]"
                     >
-                      Learn about all injection procedures →
+                      All injection procedures{" "}
+                      <span className="arrow" aria-hidden="true">→</span>
                     </Link>
                   </div>
                 )}
 
-                <div className="bg-brand-cream rounded-xl p-6">
-                  <h3
-                    className="font-bold text-brand-navy text-base mb-3"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    All Procedures
-                  </h3>
-                  <ul className="space-y-2 text-sm">
+                <div className="card p-6">
+                  <p className="eyebrow mb-4">All Procedures</p>
+                  <ul className="space-y-2.5 text-[0.92rem]">
                     {procedures
                       .filter((p) => !p.parentSlug)
                       .map((p) => (
@@ -249,8 +198,8 @@ export default async function ProcedurePage({ params }: Props) {
                             href={`/procedures/${p.slug}`}
                             className={`hover:underline ${
                               p.slug === procedure.slug
-                                ? "text-brand-navy font-bold"
-                                : "text-brand-blue"
+                                ? "text-ink font-semibold"
+                                : "text-clay-deep"
                             }`}
                           >
                             {p.name}
@@ -259,21 +208,16 @@ export default async function ProcedurePage({ params }: Props) {
                       ))}
                   </ul>
                 </div>
-              </div>
+              </aside>
+            </div>
+
+            <div className="mt-14 pt-8 border-t border-line">
+              <Link href="/procedures" className="link-arrow">
+                <span aria-hidden="true">←</span> Back to all procedures
+              </Link>
             </div>
           </div>
         </section>
-
-        <div className="bg-white border-t border-gray-100 py-6">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Link
-              href="/procedures"
-              className="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline text-sm"
-            >
-              ← Back to All Procedures
-            </Link>
-          </div>
-        </div>
       </main>
       <Footer />
       <StickyCallBar />
