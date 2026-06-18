@@ -6,6 +6,11 @@ interface ContactPayload {
   phone: string;
   email: string;
   isNewPatient: "yes" | "no";
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
   message: string;
 }
 
@@ -64,6 +69,7 @@ export async function POST(request: NextRequest) {
       <tr><td><strong>Phone</strong></td><td>${body.phone}</td></tr>
       <tr><td><strong>Email</strong></td><td>${body.email}</td></tr>
       <tr><td><strong>Patient Type</strong></td><td>${patientType}</td></tr>
+      ${body.address1 ? `<tr><td><strong>Address</strong></td><td>${[body.address1, body.address2, body.city, body.state, body.zip].filter(Boolean).join(", ")}</td></tr>` : ""}
       <tr><td><strong>Message</strong></td><td style="white-space: pre-wrap;">${body.message}</td></tr>
     </table>
     <p style="color: #666; font-size: 12px; margin-top: 24px;">
@@ -80,7 +86,7 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Global Pain Management Website <noreply@globalpainmd.com>",
+        from: "Global Pain Management Website <formsubmissions@gascmd.com>",
         to: [contactEmail],
         reply_to: body.email,
         subject: `New ${patientType} Inquiry — ${body.firstName} ${body.lastName}`,

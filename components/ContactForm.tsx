@@ -9,6 +9,11 @@ interface FormData {
   phone: string;
   email: string;
   isNewPatient: "yes" | "no";
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
   message: string;
 }
 
@@ -199,6 +204,55 @@ export default function ContactForm() {
             </p>
           )}
         </fieldset>
+      </div>
+
+      {/* Address */}
+      <div className="mt-5">
+        <p className={labelClass}>Address <span className="text-text-muted font-normal">(optional)</span></p>
+        <div className="grid grid-cols-1 gap-4 mt-1">
+          <input
+            id="address1"
+            type="text"
+            autoComplete="address-line1"
+            placeholder="Street address"
+            className={inputClass}
+            {...register("address1")}
+          />
+          <input
+            id="address2"
+            type="text"
+            autoComplete="address-line2"
+            placeholder="Apt, suite, unit, etc."
+            className={inputClass}
+            {...register("address2")}
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <input
+              id="city"
+              type="text"
+              autoComplete="address-level2"
+              placeholder="City"
+              className={`${inputClass} sm:col-span-1`}
+              {...register("city")}
+            />
+            <input
+              id="state"
+              type="text"
+              autoComplete="address-level1"
+              placeholder="State"
+              className={inputClass}
+              {...register("state")}
+            />
+            <input
+              id="zip"
+              type="text"
+              autoComplete="postal-code"
+              placeholder="ZIP code"
+              className={`${inputClass} col-span-2 sm:col-span-1`}
+              {...register("zip")}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Message */}
