@@ -103,7 +103,7 @@ export default function PatientResourcesPage() {
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
         />
 
-        <section className="bg-paper py-16 lg:py-24">
+        <section className="bg-paper py-12 lg:py-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-12 lg:gap-16">
               {/* Main */}

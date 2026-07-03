@@ -2,6 +2,8 @@ export interface Provider {
   slug: string;
   name: string;
   credentials: string;
+  /** Optional honorific shown before the name, e.g. "Dr." */
+  honorific?: string;
   title: string;
   isFounder?: boolean;
   bio: string[];
@@ -13,10 +15,16 @@ export interface Provider {
   imageSrc?: string;
 }
 
+export function providerDisplayName(provider: Provider): string {
+  const prefix = provider.honorific ? `${provider.honorific} ` : "";
+  return `${prefix}${provider.name}, ${provider.credentials}`;
+}
+
 export const providers: Provider[] = [
   {
     slug: "haddi-ogunsola-md",
     name: "Haddi Ogunsola",
+    honorific: "Dr.",
     credentials: "M.D.",
     title: "Medical Director",
     isFounder: true,

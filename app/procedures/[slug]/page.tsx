@@ -48,7 +48,7 @@ export default async function ProcedurePage({ params }: Props) {
       <Header />
       <main id="main-content">
         {/* Masthead */}
-        <div className="bg-navy text-paper py-16 lg:py-20">
+        <div className="bg-navy text-paper py-12 lg:py-20">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <nav
               className="flex items-center gap-2 text-paper/55 text-[0.82rem] mb-5"
@@ -86,7 +86,7 @@ export default async function ProcedurePage({ params }: Props) {
           </div>
         </div>
 
-        <section className="bg-paper py-16 lg:py-24">
+        <section className="bg-paper py-12 lg:py-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-12 lg:gap-16">
               {/* Article */}

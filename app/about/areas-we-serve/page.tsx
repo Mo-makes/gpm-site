@@ -24,7 +24,7 @@ const areas = [
   {
     name: "Kent Island, MD",
     description:
-      "We regularly see patients from Kent Island and the Eastern Shore who make the trip across the Bay Bridge for specialized pain care they cannot access locally.",
+      "Our Kent Island office at 130 Love Point Rd, Suite 106 in Stevensville brings board-certified pain management to Queen Anne's County — no Bay Bridge crossing required for local patients.",
     highlight: true,
   },
   {
@@ -68,13 +68,13 @@ export default function AreasWeServePage() {
         <HeroSection
           badge="Service Area"
           headline="Pain management serving central Maryland"
-          subheadline="Experience a world of difference. Conveniently located on Ritchie Highway in Pasadena, we serve patients from Pasadena, Kent Island, Columbia, and across Anne Arundel, Queen Anne's, and Howard Counties."
+          subheadline="Experience a world of difference. With offices in Pasadena and on Kent Island, we serve patients from Stevensville, Columbia, and across Anne Arundel, Queen Anne's, and Howard Counties."
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
         />
 
-        <section className="bg-paper py-16 lg:py-24">
+        <section className="bg-paper py-12 lg:py-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12">
+            <div className="max-w-2xl mb-8 lg:mb-12">
               <p className="eyebrow mb-5">Communities We Serve</p>
               <h2 className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-4">
                 Convenient to all of central Maryland

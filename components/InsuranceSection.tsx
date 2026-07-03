@@ -2,7 +2,7 @@ import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export default function InsuranceSection() {
   return (
-    <section className="bg-paper py-16 lg:py-24 border-t border-line">
+    <section className="bg-paper py-12 lg:py-24 border-t border-line">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p className="eyebrow eyebrow--center mb-5">Insurance &amp; Billing</p>
         <h2 className="text-3xl lg:text-[2.6rem] leading-[1.1] text-ink mb-5">

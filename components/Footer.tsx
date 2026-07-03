@@ -4,11 +4,14 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
   FAX_DISPLAY,
-  ADDRESS,
+  EMAIL_DISPLAY,
+  EMAIL_HREF,
+  LOCATIONS,
   PATIENT_PORTAL_URL,
   MAPS_URL,
   FACEBOOK_URL,
 } from "@/lib/site";
+import OfficeLocations from "@/components/OfficeLocations";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -43,8 +46,8 @@ function ColumnHeading({ children }: { children: React.ReactNode }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-navy text-paper/70" role="contentinfo">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10 py-14 lg:py-20">
+    <footer className="bg-navy text-paper/70 pb-20 lg:pb-0" role="contentinfo">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
           {/* Contact */}
           <div className="md:col-span-5">
@@ -65,10 +68,7 @@ export default function Footer() {
               Experience a world of difference.
             </p>
             <address className="not-italic text-[0.95rem] space-y-1.5 leading-relaxed text-paper/75">
-              <p>{ADDRESS.line1}</p>
-              <p>
-                {ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}
-              </p>
+              <OfficeLocations showLabels variant="footer" className="space-y-4" />
               <p className="pt-3">
                 <a
                   href={PHONE_HREF}
@@ -79,6 +79,12 @@ export default function Footer() {
                 <span className="text-paper/40"> · phone</span>
               </p>
               <p className="text-paper/55 text-[0.875rem]">{FAX_DISPLAY} · fax</p>
+              <p className="text-paper/55 text-[0.875rem]">
+                <a href={EMAIL_HREF} className="hover:text-paper transition-colors">
+                  {EMAIL_DISPLAY}
+                </a>
+                {" · email"}
+              </p>
             </address>
 
             <div className="mt-6 flex items-center gap-4 text-[0.85rem]">
@@ -101,6 +107,21 @@ export default function Footer() {
               >
                 Google Maps
               </a>
+              {LOCATIONS.length > 1 && (
+                <>
+                  <span aria-hidden="true" className="text-paper/25">
+                    /
+                  </span>
+                  <a
+                    href={LOCATIONS[1].mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-paper/60 hover:text-paper transition-colors font-medium"
+                  >
+                    Kent Island
+                  </a>
+                </>
+              )}
             </div>
           </div>
 

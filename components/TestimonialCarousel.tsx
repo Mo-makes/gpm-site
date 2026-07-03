@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useCallback } from "react";
 import TestimonialCard from "./TestimonialCard";
 import type { Testimonial } from "@/lib/data/testimonials";
 
@@ -13,13 +13,18 @@ export default function TestimonialCarousel({
 }: TestimonialCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(1);
 
-  const visibleCount =
-    typeof window !== "undefined" && window.innerWidth >= 1024
-      ? 3
-      : typeof window !== "undefined" && window.innerWidth >= 640
-      ? 2
-      : 1;
+  useLayoutEffect(() => {
+    const updateVisibleCount = () => {
+      setVisibleCount(
+        window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1
+      );
+    };
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
 
   const maxIndex = Math.max(0, testimonials.length - visibleCount);
 

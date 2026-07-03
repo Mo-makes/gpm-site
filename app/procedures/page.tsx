@@ -65,9 +65,9 @@ export default function ProceduresPage() {
         />
 
         {/* Interventional */}
-        <section className="bg-paper py-16 lg:py-24" aria-labelledby="interventional-heading">
+        <section className="bg-paper py-12 lg:py-24" aria-labelledby="interventional-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12">
+            <div className="max-w-2xl mb-8 lg:mb-12">
               <p className="eyebrow mb-5">Interventional</p>
               <h2
                 id="interventional-heading"
@@ -89,9 +89,9 @@ export default function ProceduresPage() {
         </section>
 
         {/* Other therapies */}
-        <section className="bg-sand py-16 lg:py-24" aria-labelledby="therapies-heading">
+        <section className="bg-sand py-12 lg:py-24" aria-labelledby="therapies-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12">
+            <div className="max-w-2xl mb-8 lg:mb-12">
               <p className="eyebrow mb-5">Supportive Therapies</p>
               <h2
                 id="therapies-heading"
@@ -113,7 +113,7 @@ export default function ProceduresPage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-navy text-paper py-16 lg:py-20">
+        <section className="bg-navy text-paper py-12 lg:py-20">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl lg:text-[2.4rem] leading-[1.1] text-paper mb-4">
               Find out which treatment is right for you

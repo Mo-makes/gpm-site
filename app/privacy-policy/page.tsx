@@ -29,12 +29,12 @@ export default function PrivacyPolicyPage() {
       <PatientPortalBanner />
       <Header />
       <main id="main-content" className="bg-paper">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
           <p className="eyebrow mb-5">Legal</p>
           <h1 className="text-4xl lg:text-[3rem] leading-[1.05] text-ink mb-2">
             Privacy Policy
           </h1>
-          <p className="text-muted text-[0.9rem] mb-12">Last updated: January 2025</p>
+          <p className="text-muted text-[0.9rem] mb-8 lg:mb-12">Last updated: January 2025</p>
 
           <div className="space-y-10">
             <Section id="intro-heading" title="Introduction">

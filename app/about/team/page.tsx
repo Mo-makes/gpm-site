@@ -28,9 +28,9 @@ export default function TeamPage() {
           primaryCta={{ label: "Request Appointment", href: "/contact" }}
         />
 
-        <section className="bg-paper py-16 lg:py-24" aria-labelledby="team-heading">
+        <section className="bg-paper py-12 lg:py-24" aria-labelledby="team-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12">
+            <div className="max-w-2xl mb-8 lg:mb-12">
               <p className="eyebrow mb-5">Our Providers</p>
               <h2
                 id="team-heading"

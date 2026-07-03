@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Provider } from "@/lib/data/providers";
+import { providerDisplayName } from "@/lib/data/providers";
 
 interface ProviderCardProps {
   provider: Provider;
@@ -43,7 +44,7 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
           className="font-fraunces text-[1.28rem] text-ink leading-tight"
           style={{ fontWeight: 560 }}
         >
-          {provider.name}
+          {providerDisplayName(provider)}
         </h3>
         <p className="text-[0.76rem] uppercase tracking-[0.1em] text-sage-deep mt-1.5">
           {provider.title}
@@ -64,7 +65,7 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline w-full text-[0.85rem] py-2.5"
-            aria-label={`Join telemedicine visit with ${provider.name}`}
+            aria-label={`Join telemedicine visit with ${providerDisplayName(provider)}`}
           >
             Telemedicine visit
           </a>

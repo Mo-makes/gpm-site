@@ -3,13 +3,14 @@ import type { Condition } from "@/lib/data/conditions";
 
 interface ConditionCardProps {
   condition: Condition;
+  className?: string;
 }
 
-export default function ConditionCard({ condition }: ConditionCardProps) {
+export default function ConditionCard({ condition, className = "" }: ConditionCardProps) {
   return (
     <Link
       href={`/conditions/${condition.slug}`}
-      className="card card-link group p-6 flex flex-col h-full"
+      className={`card card-link group p-6 flex flex-col h-full ${className}`}
     >
       <span
         className="block h-px w-9 bg-clay mb-5 transition-all duration-300 group-hover:w-16"

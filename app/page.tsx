@@ -9,6 +9,7 @@ import ConditionCard from "@/components/ConditionCard";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import ContactForm from "@/components/ContactForm";
 import OfficeHoursCard from "@/components/OfficeHoursCard";
+import OfficeLocations from "@/components/OfficeLocations";
 import StickyCallBar from "@/components/StickyCallBar";
 import { providers } from "@/lib/data/providers";
 import { conditions } from "@/lib/data/conditions";
@@ -18,7 +19,7 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
   FAX_DISPLAY,
-  ADDRESS,
+  LOCATIONS,
   MAPS_URL,
 } from "@/lib/site";
 
@@ -58,12 +59,25 @@ const localBusinessJsonLd = {
   paymentAccepted: "Insurance, Cash, Credit Card",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "8031 Ritchie Highway, Suite 100",
-    addressLocality: "Pasadena",
-    addressRegion: "MD",
-    postalCode: "21122",
+    streetAddress: LOCATIONS[0].address.line1,
+    addressLocality: LOCATIONS[0].address.city,
+    addressRegion: LOCATIONS[0].address.state,
+    postalCode: LOCATIONS[0].address.zip,
     addressCountry: "US",
   },
+  location: LOCATIONS.map((loc) => ({
+    "@type": "Place",
+    name: loc.label,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: loc.address.line1,
+      addressLocality: loc.address.city,
+      addressRegion: loc.address.state,
+      postalCode: loc.address.zip,
+      addressCountry: "US",
+    },
+    hasMap: loc.mapsUrl,
+  })),
   geo: {
     "@type": "GeoCoordinates",
     latitude: 39.1194,
@@ -154,9 +168,9 @@ export default function HomePage() {
         />
 
         {/* Practice in brief */}
-        <section className="bg-sand py-16 lg:py-24" aria-labelledby="brief-heading">
+        <section className="bg-sand py-12 lg:py-24" aria-labelledby="brief-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12 lg:mb-16">
+            <div className="max-w-2xl mb-8 lg:mb-16">
               <p className="eyebrow mb-5">Why Global Pain Management</p>
               <h2
                 id="brief-heading"
@@ -182,9 +196,9 @@ export default function HomePage() {
         </section>
 
         {/* Conditions */}
-        <section className="bg-paper py-16 lg:py-24" aria-labelledby="conditions-heading">
+        <section className="bg-paper py-12 lg:py-24" aria-labelledby="conditions-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 lg:mb-12">
               <div className="max-w-2xl">
                 <p className="eyebrow mb-5">Conditions We Treat</p>
                 <h2
@@ -204,8 +218,12 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {conditions.slice(0, 9).map((condition) => (
-                <ConditionCard key={condition.slug} condition={condition} />
+              {conditions.slice(0, 9).map((condition, i) => (
+                <ConditionCard
+                  key={condition.slug}
+                  condition={condition}
+                  className={i >= 6 ? "hidden sm:flex" : ""}
+                />
               ))}
             </div>
             <div className="mt-10 flex flex-wrap gap-4">
@@ -220,9 +238,9 @@ export default function HomePage() {
         </section>
 
         {/* Providers */}
-        <section className="bg-sand py-16 lg:py-24" aria-labelledby="providers-heading">
+        <section className="bg-sand py-12 lg:py-24" aria-labelledby="providers-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12">
+            <div className="max-w-2xl mb-8 lg:mb-12">
               <p className="eyebrow mb-5">Your Care Team</p>
               <h2
                 id="providers-heading"
@@ -250,7 +268,7 @@ export default function HomePage() {
         </section>
 
         {/* Story / stats — navy */}
-        <section className="bg-navy text-paper py-16 lg:py-24" aria-labelledby="about-heading">
+        <section className="bg-navy text-paper py-12 lg:py-24" aria-labelledby="about-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
               <div>
@@ -288,7 +306,7 @@ export default function HomePage() {
                 {stats.map((stat) => (
                   <div key={stat.label} className="bg-navy p-7 text-center">
                     <p
-                      className="font-fraunces text-4xl lg:text-[2.9rem] text-brass leading-none mb-2"
+                      className="font-fraunces text-2xl sm:text-3xl lg:text-4xl xl:text-[2.9rem] text-brass leading-none mb-2"
                       style={{ fontWeight: 500 }}
                     >
                       {stat.value}
@@ -304,9 +322,9 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials */}
-        <section className="bg-paper py-16 lg:py-24" aria-labelledby="testimonials-heading">
+        <section className="bg-paper py-12 lg:py-24" aria-labelledby="testimonials-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12">
+            <div className="max-w-2xl mb-8 lg:mb-12">
               <p className="eyebrow mb-5">Patient Stories</p>
               <h2
                 id="testimonials-heading"
@@ -330,7 +348,7 @@ export default function HomePage() {
         </section>
 
         {/* Contact + location */}
-        <section className="bg-sand py-16 lg:py-24" aria-labelledby="contact-heading">
+        <section className="bg-sand py-12 lg:py-24" aria-labelledby="contact-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               <div>
@@ -349,15 +367,12 @@ export default function HomePage() {
               </div>
               <div className="space-y-6">
                 <div className="card p-7">
-                  <p className="eyebrow mb-4">Our Office</p>
-                  <address className="not-italic text-[0.97rem] text-body space-y-1.5 leading-relaxed">
-                    <p className="font-fraunces text-lg text-ink" style={{ fontWeight: 560 }}>
+                  <p className="eyebrow mb-4">Our Offices</p>
+                  <div className="text-[0.97rem] text-body space-y-1.5 leading-relaxed">
+                    <p className="font-fraunces text-lg text-ink mb-3" style={{ fontWeight: 560 }}>
                       Global Pain Management
                     </p>
-                    <p>{ADDRESS.line1}</p>
-                    <p>
-                      {ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}
-                    </p>
+                    <OfficeLocations showLabels />
                     <div className="pt-3 space-y-1">
                       <p>
                         <a href={PHONE_HREF} className="text-clay-deep font-semibold hover:underline">
@@ -367,29 +382,36 @@ export default function HomePage() {
                       </p>
                       <p className="text-muted text-[0.88rem]">{FAX_DISPLAY} · fax</p>
                     </div>
-                  </address>
-                  <div className="mt-5">
-                    <a
-                      href={MAPS_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline w-full text-[0.85rem] py-2.5"
-                    >
-                      Get Directions
-                    </a>
+                  </div>
+                  <div className="mt-5 flex flex-col gap-2.5">
+                    {LOCATIONS.map((location) => (
+                      <a
+                        key={location.id}
+                        href={location.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline w-full text-[0.85rem] py-2.5"
+                      >
+                        Directions — {location.label.replace(" Office", "")}
+                      </a>
+                    ))}
                   </div>
                 </div>
                 <OfficeHoursCard />
-                <div className="plate" style={{ aspectRatio: "16 / 10" }}>
-                  <iframe
-                    title="Global Pain Management location on Google Maps"
-                    src="https://maps.google.com/maps?q=8031+Ritchie+Hwy+Suite+100+Pasadena+MD+21122&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                    className="w-full h-full"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {LOCATIONS.map((location) => (
+                    <div key={location.id} className="plate" style={{ aspectRatio: "16 / 10" }}>
+                      <iframe
+                        title={`Global Pain Management — ${location.label}`}
+                        src={`https://maps.google.com/maps?q=${location.mapsEmbedQuery}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                        className="w-full h-full"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

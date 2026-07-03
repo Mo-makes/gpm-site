@@ -42,7 +42,7 @@ function Masthead({
   intro: string;
 }) {
   return (
-    <div className="bg-navy text-paper py-16 lg:py-20">
+    <div className="bg-navy text-paper py-12 lg:py-20">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
         <p className="eyebrow eyebrow--light mb-5">{eyebrow}</p>
         <h1 className="text-4xl lg:text-[3.4rem] leading-[1.05] text-paper max-w-3xl">
@@ -82,7 +82,7 @@ export default async function ConditionPage({ params }: Props) {
             title={condition.name}
             intro={condition.shortDescription}
           />
-          <section className="bg-paper py-16 lg:py-24">
+          <section className="bg-paper py-12 lg:py-24">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
               <p className="lead text-body dropcap mb-7">
                 At Global Pain Management, we have extensive experience treating{" "}
@@ -158,7 +158,7 @@ export default async function ConditionPage({ params }: Props) {
           intro={condition.shortDescription}
         />
 
-        <section className="bg-paper py-16 lg:py-24">
+        <section className="bg-paper py-12 lg:py-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-12 lg:gap-16">
               {/* Article */}

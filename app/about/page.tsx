@@ -78,7 +78,7 @@ export default function AboutPage() {
         />
 
         {/* Mission */}
-        <section className="bg-paper py-16 lg:py-24" aria-labelledby="mission-heading">
+        <section className="bg-paper py-12 lg:py-24" aria-labelledby="mission-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               <div>
@@ -125,9 +125,9 @@ export default function AboutPage() {
         </section>
 
         {/* Timeline */}
-        <section className="bg-sand py-16 lg:py-24" aria-labelledby="history-heading">
+        <section className="bg-sand py-12 lg:py-24" aria-labelledby="history-heading">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
+            <div className="mb-8 lg:mb-12">
               <p className="eyebrow mb-5">Our History</p>
               <h2
                 id="history-heading"
@@ -157,7 +157,7 @@ export default function AboutPage() {
         <TelemedicineSection />
 
         {/* CTA */}
-        <section className="bg-navy text-paper py-16 lg:py-20">
+        <section className="bg-navy text-paper py-12 lg:py-20">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl lg:text-[2.4rem] leading-[1.1] text-paper mb-4">
               Ready to start your pain management journey?

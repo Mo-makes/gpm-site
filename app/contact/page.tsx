@@ -7,13 +7,15 @@ import HeroSection from "@/components/HeroSection";
 import ContactForm from "@/components/ContactForm";
 import InsuranceSection from "@/components/InsuranceSection";
 import OfficeHoursCard from "@/components/OfficeHoursCard";
+import OfficeLocations from "@/components/OfficeLocations";
 import StickyCallBar from "@/components/StickyCallBar";
 import {
   PHONE_DISPLAY,
   PHONE_HREF,
   FAX_DISPLAY,
-  ADDRESS,
-  MAPS_URL,
+  EMAIL_DISPLAY,
+  EMAIL_HREF,
+  LOCATIONS,
   PATIENT_PORTAL_URL,
 } from "@/lib/site";
 
@@ -47,7 +49,7 @@ export default function ContactPage() {
           primaryCta={{ label: `Call ${PHONE_DISPLAY}`, href: PHONE_HREF }}
         />
 
-        <section className="bg-paper py-16 lg:py-24">
+        <section className="bg-paper py-12 lg:py-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_22rem] gap-12 lg:gap-16">
               {/* Form */}
@@ -77,32 +79,39 @@ export default function ContactPage() {
                     />
                   </div>
                   <div className="p-6">
-                    <p className="eyebrow mb-4">Our Office</p>
-                    <address className="not-italic text-[0.95rem] text-body space-y-1.5 leading-relaxed">
-                      <p className="font-fraunces text-lg text-ink" style={{ fontWeight: 560 }}>
+                    <p className="eyebrow mb-4">Our Offices</p>
+                    <div className="space-y-1">
+                      <p className="font-fraunces text-lg text-ink mb-3" style={{ fontWeight: 560 }}>
                         Global Pain Management
                       </p>
-                      <p>{ADDRESS.line1}</p>
-                      <p>
-                        {ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}
-                      </p>
-                      <div className="pt-3 space-y-1">
+                      <OfficeLocations showLabels />
+                    </div>
+                    <div className="pt-3 space-y-1 text-[0.95rem] text-body">
                         <p>
                           <a href={PHONE_HREF} className="text-clay-deep font-semibold hover:underline">
                             {PHONE_DISPLAY}
                           </a>
                         </p>
                         <p className="text-muted text-[0.85rem]">Fax: {FAX_DISPLAY}</p>
+                        <p className="text-muted text-[0.85rem]">
+                          <a href={EMAIL_HREF} className="text-clay-deep hover:underline">
+                            {EMAIL_DISPLAY}
+                          </a>
+                        </p>
                       </div>
-                    </address>
-                    <a
-                      href={MAPS_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline w-full text-[0.85rem] py-2.5 mt-5"
-                    >
-                      Get Directions
-                    </a>
+                    <div className="mt-5 flex flex-col gap-2.5">
+                      {LOCATIONS.map((location) => (
+                        <a
+                          key={location.id}
+                          href={location.mapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-outline w-full text-[0.85rem] py-2.5"
+                        >
+                          Directions — {location.label.replace(" Office", "")}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -128,17 +137,24 @@ export default function ContactPage() {
               </aside>
             </div>
 
-            {/* Map */}
-            <div className="mt-12 plate" style={{ aspectRatio: "21 / 7" }}>
-              <iframe
-                title="Global Pain Management office location"
-                src="https://maps.google.com/maps?q=8031+Ritchie+Hwy+Suite+100+Pasadena+MD+21122&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                className="w-full h-full"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            {/* Maps */}
+            <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {LOCATIONS.map((location) => (
+                <div key={location.id}>
+                  <p className="eyebrow mb-3">{location.label}</p>
+                  <div className="plate" style={{ aspectRatio: "21 / 9" }}>
+                    <iframe
+                      title={`Global Pain Management — ${location.label}`}
+                      src={`https://maps.google.com/maps?q=${location.mapsEmbedQuery}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                      className="w-full h-full"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

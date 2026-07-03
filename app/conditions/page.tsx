@@ -80,9 +80,9 @@ export default function ConditionsPage() {
           secondaryCta={{ label: "View Procedures", href: "/procedures" }}
         />
 
-        <section className="bg-paper py-16 lg:py-24" aria-labelledby="conditions-list-heading">
+        <section className="bg-paper py-12 lg:py-24" aria-labelledby="conditions-list-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="max-w-2xl mb-12">
+            <div className="max-w-2xl mb-8 lg:mb-12">
               <p className="eyebrow mb-5">All Conditions</p>
               <h2
                 id="conditions-list-heading"
@@ -119,7 +119,7 @@ export default function ConditionsPage() {
           </div>
         </section>
 
-        <section className="bg-sand py-16 lg:py-24" aria-labelledby="conditions-faq-heading">
+        <section className="bg-sand py-12 lg:py-24" aria-labelledby="conditions-faq-heading">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
               <p className="eyebrow mb-5">Common Questions</p>

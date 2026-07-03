@@ -16,18 +16,20 @@ export default function TrustBadges({ variant = "light" }: TrustBadgesProps) {
 
   return (
     <dl
-      className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5"
+      className="grid grid-cols-2 gap-x-5 gap-y-4"
       aria-label="Credentials and recognitions"
     >
       {credentials.map((c) => (
-        <div key={c.value} className="flex flex-col border-l-2 border-clay/40 pl-4">
+        <div key={c.value} className="flex flex-col border-l-2 border-clay/40 pl-3">
           <dt
-            className={`font-fraunces text-[1rem] leading-tight ${value}`}
+            className={`font-fraunces text-[0.92rem] sm:text-[1rem] leading-tight ${value}`}
             style={{ fontWeight: 560 }}
           >
             {c.value}
           </dt>
-          <dd className={`mt-0.5 text-[0.72rem] uppercase tracking-[0.11em] ${detail}`}>
+          <dd
+            className={`mt-0.5 text-[0.66rem] sm:text-[0.72rem] uppercase tracking-[0.1em] leading-snug ${detail}`}
+          >
             {c.detail}
           </dd>
         </div>

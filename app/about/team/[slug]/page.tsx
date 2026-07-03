@@ -6,7 +6,7 @@ import PatientPortalBanner from "@/components/PatientPortalBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyCallBar from "@/components/StickyCallBar";
-import { providers } from "@/lib/data/providers";
+import { providers, providerDisplayName } from "@/lib/data/providers";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 interface Props {
@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!provider) return {};
 
   return {
-    title: `${provider.name}, ${provider.credentials} | Pain Management Provider`,
-    description: `Meet ${provider.name}, ${provider.credentials}, ${provider.title} at Global Pain Management in Pasadena, MD. Specializing in comprehensive pain management care.`,
+    title: `${providerDisplayName(provider)} | Pain Management Provider`,
+    description: `Meet ${providerDisplayName(provider)}, ${provider.title} at Global Pain Management in Pasadena and Kent Island, MD. Specializing in comprehensive pain management care.`,
     alternates: {
       canonical: `https://globalpainmd.com/about/team/${provider.slug}`,
     },
@@ -41,7 +41,7 @@ export default async function ProviderPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "Physician",
     "@id": `https://globalpainmd.com/about/team/${provider.slug}#provider`,
-    name: `${provider.name}, ${provider.credentials}`,
+    name: providerDisplayName(provider),
     givenName: provider.name.split(" ")[0],
     familyName: provider.name.split(" ").slice(1).join(" "),
     jobTitle: provider.title,
@@ -72,7 +72,7 @@ export default async function ProviderPage({ params }: Props) {
       { "@type": "ListItem", position: 1, name: "Home", item: "https://globalpainmd.com" },
       { "@type": "ListItem", position: 2, name: "About", item: "https://globalpainmd.com/about" },
       { "@type": "ListItem", position: 3, name: "Our Team", item: "https://globalpainmd.com/about/team" },
-      { "@type": "ListItem", position: 4, name: `${provider.name}, ${provider.credentials}`, item: `https://globalpainmd.com/about/team/${provider.slug}` },
+      { "@type": "ListItem", position: 4, name: providerDisplayName(provider), item: `https://globalpainmd.com/about/team/${provider.slug}` },
     ],
   };
 
@@ -84,7 +84,7 @@ export default async function ProviderPage({ params }: Props) {
       <Header />
       <main id="main-content">
         {/* Masthead */}
-        <div className="bg-navy text-paper py-16 lg:py-20">
+        <div className="bg-navy text-paper py-12 lg:py-20">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="flex flex-col sm:flex-row items-start gap-8 lg:gap-12">
               <div className="w-40 h-48 sm:w-44 sm:h-56 shrink-0 overflow-hidden rounded-[5px] border border-paper/15 bg-navy-soft">
@@ -110,12 +110,9 @@ export default async function ProviderPage({ params }: Props) {
                   <p className="eyebrow eyebrow--light mb-4">Founder &amp; Medical Director</p>
                 )}
                 <h1 className="text-4xl lg:text-[3.2rem] leading-[1.04] text-paper">
-                  {provider.name}
+                  {providerDisplayName(provider)}
                 </h1>
-                <p className="mt-2 font-fraunces text-2xl text-brass" style={{ fontWeight: 500 }}>
-                  {provider.credentials}
-                </p>
-                <p className="mt-1 text-paper/65 text-[0.95rem]">{provider.title}</p>
+                <p className="mt-2 text-paper/65 text-[0.95rem]">{provider.title}</p>
                 <div className="mt-7 flex flex-wrap gap-3">
                   <a
                     href={provider.telemedicineUrl}
@@ -135,12 +132,12 @@ export default async function ProviderPage({ params }: Props) {
         </div>
 
         {/* Bio */}
-        <section className="bg-paper py-16 lg:py-24">
+        <section className="bg-paper py-12 lg:py-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-12 lg:gap-16">
               <article className="max-w-2xl">
                 <h2 className="text-[1.7rem] text-ink mb-6" style={{ fontWeight: 560 }}>
-                  About {provider.name}
+                  About {providerDisplayName(provider)}
                 </h2>
                 <div className="space-y-5 text-body leading-relaxed">
                   {provider.bio.map((paragraph, i) => (

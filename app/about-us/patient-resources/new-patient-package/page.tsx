@@ -20,7 +20,7 @@ export default function NewPatientPackagePage() {
       <Header />
       <main id="main-content">
         {/* Masthead */}
-        <section className="bg-navy text-paper py-16 lg:py-20">
+        <section className="bg-navy text-paper py-12 lg:py-20">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="eyebrow eyebrow--light eyebrow--center mb-5">Patient Resources</p>
             <h1 className="text-4xl lg:text-[3.2rem] leading-[1.06] text-paper">
