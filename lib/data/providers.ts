@@ -13,6 +13,8 @@ export interface Provider {
   imageAlt: string;
   /** Path relative to /public, e.g. "/images/haddio.webp" */
   imageSrc?: string;
+  /** CSS object-position for portrait crop, e.g. "center 20%" */
+  imageObjectPosition?: string;
 }
 
 export function providerDisplayName(provider: Provider): string {
@@ -50,6 +52,7 @@ export const providers: Provider[] = [
     telemedicineUrl: "https://doxy.me/drogunsolagpm",
     imageAlt: "Dr. Haddi Ogunsola, M.D., Founder of Global Pain Management",
     imageSrc: "/images/haddio.webp",
+    imageObjectPosition: "center 28%",
   },
   {
     slug: "nia-valentine-crnp",
@@ -91,6 +94,7 @@ export const providers: Provider[] = [
     telemedicineUrl: "https://doxy.me/shannonwrobelnp",
     imageAlt: "Shannon Wrobel, CRNP, Nurse Practitioner at Global Pain Management",
     imageSrc: "/images/shannonv.webp",
+    imageObjectPosition: "center 22%",
   },
   // TODO: Nicole Small, CRNP — no longer with the practice as of the site rebuild.
   // If she returns or a replacement provider is added, create a new entry here.

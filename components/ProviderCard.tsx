@@ -19,6 +19,7 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+            style={{ objectPosition: provider.imageObjectPosition ?? "center top" }}
             priority={provider.slug === "haddi-ogunsola-md"}
           />
         ) : (

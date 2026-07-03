@@ -95,6 +95,7 @@ export default async function ProviderPage({ params }: Props) {
                     width={220}
                     height={280}
                     className="w-full h-full object-cover object-top"
+                    style={{ objectPosition: provider.imageObjectPosition ?? "center top" }}
                     priority
                   />
                 ) : (
