@@ -1,6 +1,10 @@
 // Shared, single-source-of-truth site facts. Keeping these here prevents the
 // "12+ / 15+ / fifteen years" drift that crept into the previous build.
 
+/** Canonical production origin — single source of truth for absolute URLs
+ * (metadata, sitemap, robots, JSON-LD). No trailing slash. */
+export const SITE_URL = "https://globalpainmd.com";
+
 export const FOUNDING_YEAR = 2013;
 
 /**

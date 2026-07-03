@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyCallBar from "@/components/StickyCallBar";
 import { procedures } from "@/lib/data/procedures";
-import { PHONE_DISPLAY, PHONE_HREF, ADDRESS } from "@/lib/site";
+import { PHONE_DISPLAY, PHONE_HREF, ADDRESS, SITE_URL } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -42,8 +42,57 @@ export default async function ProcedurePage({ params }: Props) {
     ? procedures.find((p) => p.slug === procedure.parentSlug)
     : null;
 
+  const procedureJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalProcedure",
+    name: procedure.name,
+    description: procedure.fullDescription ?? procedure.shortDescription,
+    url: `${SITE_URL}/procedures/${procedure.slug}`,
+    procedureType: "https://schema.org/NoninvasiveProcedure",
+    howPerformed: procedure.whatToExpect,
+    provider: {
+      "@type": "MedicalClinic",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Global Pain Management",
+      url: SITE_URL,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Procedures", item: `${SITE_URL}/procedures` },
+      ...(parentProcedure
+        ? [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: parentProcedure.name,
+              item: `${SITE_URL}/procedures/${parentProcedure.slug}`,
+            },
+          ]
+        : []),
+      {
+        "@type": "ListItem",
+        position: parentProcedure ? 4 : 3,
+        name: procedure.name,
+        item: `${SITE_URL}/procedures/${procedure.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(procedureJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <PatientPortalBanner />
       <Header />
       <main id="main-content">

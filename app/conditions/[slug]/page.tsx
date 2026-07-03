@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyCallBar from "@/components/StickyCallBar";
 import { conditions } from "@/lib/data/conditions";
-import { PHONE_DISPLAY, PHONE_HREF, ADDRESS } from "@/lib/site";
+import { PHONE_DISPLAY, PHONE_HREF, ADDRESS, SITE_URL } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -70,10 +70,24 @@ export default async function ConditionPage({ params }: Props) {
 
   if (!condition) notFound();
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Conditions", item: `${SITE_URL}/conditions` },
+      { "@type": "ListItem", position: 3, name: condition.name, item: `${SITE_URL}/conditions/${condition.slug}` },
+    ],
+  };
+
   // Concise page for conditions without full content
   if (!condition.fullContent) {
     return (
       <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
         <PatientPortalBanner />
         <Header />
         <main id="main-content">
@@ -137,6 +151,7 @@ export default async function ConditionPage({ params }: Props) {
     "@type": "MedicalCondition",
     name: condition.name,
     description: intro,
+    url: `${SITE_URL}/conditions/${condition.slug}`,
     possibleTreatment: treatments?.map((t) => ({
       "@type": "MedicalTherapy",
       name: t,
@@ -148,6 +163,10 @@ export default async function ConditionPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(conditionJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <PatientPortalBanner />
       <Header />
