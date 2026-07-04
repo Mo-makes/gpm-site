@@ -11,7 +11,7 @@ import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Our Medical Team | Pain Management Providers in Pasadena, MD",
   description:
-    "Meet the board-certified pain management providers at Global Pain Management — Dr. Haddi Ogunsola and our team of experienced nurse practitioners serving Pasadena, Kent Island, and Columbia, MD.",
+    "Meet the board-certified pain management providers at Global Pain Management — Haddi Ogunsola, M.D. and our team of experienced nurse practitioners serving Pasadena, Kent Island, and Columbia, MD.",
   alternates: { canonical: "https://globalpainmd.com/about/team" },
 };
 

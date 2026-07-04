@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
         destination: "/about/team",
         permanent: true,
       },
+      {
+        source: "/services",
+        destination: "/conditions",
+        permanent: true,
+      },
     ];
   },
   async headers() {

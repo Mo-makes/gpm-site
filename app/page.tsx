@@ -281,7 +281,7 @@ export default function HomePage() {
                 </h2>
                 <div className="space-y-4 text-paper/75 leading-relaxed">
                   <p>
-                    Dr. Haddi Ogunsola founded Global Pain Management with a clear
+                    Haddi Ogunsola, M.D. founded Global Pain Management with a clear
                     mission: to give the people of Pasadena, Kent Island, Columbia, and
                     Anne Arundel County access to the same interventional pain care found
                     at major academic medical centers — close to home.

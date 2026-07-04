@@ -26,14 +26,13 @@ export const providers: Provider[] = [
   {
     slug: "haddi-ogunsola-md",
     name: "Haddi Ogunsola",
-    honorific: "Dr.",
     credentials: "M.D.",
     title: "Medical Director",
     isFounder: true,
     bio: [
-      "Dr. Haddi Ogunsola is the founder and medical director of Global Pain Management. Board-certified in both Anesthesiology and Pain Medicine, and fellowship-trained as an Interventional Spine Specialist, Dr. Ogunsola established the practice in 2013 with a singular mission: to bring compassionate, evidence-based interventional pain care to the communities of Pasadena, Kent Island, Columbia, and Anne Arundel County.",
-      "Known for her outstanding bedside manner and exceptional personal touches, Dr. Ogunsola believes that every individual deserves a chance to live a better life with less pain. She is dedicated to treating the whole patient — not just the diagnosis — and tailors every treatment plan to the individual's lifestyle, goals, and medical history.",
-      "Dr. Ogunsola has been recognized as a Maryland Top Doctor (2024) and Women in Medicine honoree (2023). She has given lectures and presentations on chronic pain management and has been interviewed as a subject-matter expert on pain management topics.",
+      "Haddi Ogunsola is the founder and medical director of Global Pain Management. Board-certified in both Anesthesiology and Pain Medicine, and fellowship-trained as an Interventional Spine Specialist, Ogunsola established the practice in 2013 with a singular mission: to bring compassionate, evidence-based interventional pain care to the communities of Pasadena, Kent Island, Columbia, and Anne Arundel County.",
+      "Known for her outstanding bedside manner and exceptional personal touches, Ogunsola believes that every individual deserves a chance to live a better life with less pain. She is dedicated to treating the whole patient — not just the diagnosis — and tailors every treatment plan to the individual's lifestyle, goals, and medical history.",
+      "Ogunsola has been recognized as a Maryland Top Doctor (2024) and Women in Medicine honoree (2023). She has given lectures and presentations on chronic pain management and has been interviewed as a subject-matter expert on pain management topics.",
     ],
     specialties: [
       "Interventional pain management",
@@ -50,7 +49,7 @@ export const providers: Provider[] = [
       "Fellowship: ACGME Accredited Interventional Pain Medicine — University of Maryland Medical Center / R Adams Cowley Shock Trauma Center",
     ],
     telemedicineUrl: "https://doxy.me/drogunsolagpm",
-    imageAlt: "Dr. Haddi Ogunsola, M.D., Founder of Global Pain Management",
+    imageAlt: "Haddi Ogunsola, M.D., Founder of Global Pain Management",
     imageSrc: "/images/haddio.webp",
     imageObjectPosition: "center 28%",
   },

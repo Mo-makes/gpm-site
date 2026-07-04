@@ -11,7 +11,7 @@ import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About Global Pain Management | Pasadena, MD",
   description:
-    "Learn about Global Pain Management, founded in 2013 by Dr. Haddi Ogunsola. Serving Pasadena, Kent Island, and Anne Arundel County with compassionate, board-certified pain care.",
+    "Learn about Global Pain Management, founded in 2013 by Haddi Ogunsola, M.D. Serving Pasadena, Kent Island, and Anne Arundel County with compassionate, board-certified pain care.",
   alternates: { canonical: "https://globalpainmd.com/about" },
 };
 
@@ -27,7 +27,7 @@ const breadcrumbJsonLd = {
 const milestones = [
   {
     year: "2013",
-    text: "Dr. Haddi Ogunsola founds Global Pain Management in Pasadena, MD with a mission to bring interventional pain care to the local community.",
+    text: "Haddi Ogunsola, M.D. founds Global Pain Management in Pasadena, MD with a mission to bring interventional pain care to the local community.",
   },
   {
     year: "2013",
@@ -96,7 +96,7 @@ export default function AboutPage() {
                     things back.
                   </p>
                   <p>
-                    Dr. Haddi Ogunsola founded this practice because she believed the
+                    Haddi Ogunsola, M.D. founded this practice because she believed the
                     communities of Anne Arundel County deserved access to the kind of
                     board-certified, interventional pain care typically found only at
                     large academic centers. More than a decade later, that belief drives
