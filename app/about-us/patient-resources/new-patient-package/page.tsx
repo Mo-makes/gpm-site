@@ -1,18 +1,12 @@
 "use client";
 
-import Script from "next/script";
 import PatientPortalBanner from "@/components/PatientPortalBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyCallBar from "@/components/StickyCallBar";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
-// TODO: Replace with your Tally form ID once you've created the form at tally.so
-// e.g. if your form URL is https://tally.so/r/abc123, the ID is "abc123"
-const TALLY_FORM_ID = "";
-
 export default function NewPatientPackagePage() {
-  const hasForm = Boolean(TALLY_FORM_ID);
 
   return (
     <>
@@ -39,7 +33,6 @@ export default function NewPatientPackagePage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <ul className="flex flex-wrap gap-x-8 gap-y-2 text-[0.88rem] text-body justify-center">
               {[
-                "Takes about 10–15 minutes",
                 "Save and continue later if needed",
                 "Your information is encrypted and secure",
                 `Questions? Call ${PHONE_DISPLAY}`,
@@ -58,51 +51,18 @@ export default function NewPatientPackagePage() {
         {/* Form area */}
         <section className="bg-paper py-12 lg:py-16 min-h-[600px]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            {hasForm ? (
-              <iframe
-                data-tally-src={`https://tally.so/embed/${TALLY_FORM_ID}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
-                loading="lazy"
-                width="100%"
-                height="800"
-                frameBorder={0}
-                marginHeight={0}
-                marginWidth={0}
-                title="New Patient Registration Form"
-                className="w-full"
-              />
-            ) : (
-              <div className="rounded-[6px] border border-dashed border-line-strong bg-paper-raised p-12 text-center">
-                <div className="max-w-md mx-auto">
-                  <div className="w-16 h-16 rounded-full bg-sage-soft flex items-center justify-center mx-auto mb-5">
-                    <svg
-                      className="w-8 h-8 text-sage-deep"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                  </div>
-                  <h2 className="font-fraunces text-xl text-ink mb-2" style={{ fontWeight: 560 }}>
-                    New patient form — coming soon
-                  </h2>
-                  <p className="text-body text-[0.95rem] leading-relaxed mb-6">
-                    Our online intake form is being set up. In the meantime, please call
-                    our office and we can send you the paperwork directly or have it ready
-                    when you arrive.
-                  </p>
-                  <a href={PHONE_HREF} className="btn btn-clay">
-                    Call {PHONE_DISPLAY}
-                  </a>
-                </div>
-              </div>
-            )}
+            <iframe
+              width="100%"
+              height="600"
+              src="https://forms.office.com/Pages/ResponsePage.aspx?id=hTKJag05w0ie2NTHtDg90SbLaATEj_lCtyVfbtrzSQ9UNVVNWDk2NkZCSUE0NENZSEVEV0FLMURMUy4u&embed=true"
+              frameBorder="0"
+              marginHeight={0}
+              marginWidth={0}
+              style={{ border: "none", maxWidth: "100%", maxHeight: "100vh" }}
+              allowFullScreen
+              title="New Patient Registration Form"
+              className="w-full"
+            />
           </div>
         </section>
 
@@ -121,22 +81,6 @@ export default function NewPatientPackagePage() {
       </main>
       <Footer />
       <StickyCallBar />
-
-      {/* Tally embed widget script — only loads when a form ID is set */}
-      {hasForm && (
-        <Script
-          id="tally-embed"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              var d=document,w="https://tally.so/widgets/embed.js",
-              v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc})};
-              if("undefined"!=typeof Tally)v();
-              else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s)}
-            `,
-          }}
-        />
-      )}
     </>
   );
 }
