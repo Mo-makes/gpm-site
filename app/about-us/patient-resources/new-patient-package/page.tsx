@@ -18,7 +18,7 @@ export default function NewPatientPackagePage() {
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="eyebrow eyebrow--light eyebrow--center mb-5">Patient Resources</p>
             <h1 className="text-4xl lg:text-[3.2rem] leading-[1.06] text-paper">
-              New Patient Package
+              New Patient Packet
             </h1>
             <p className="mt-5 text-paper/75 text-lg max-w-2xl mx-auto leading-relaxed">
               Please complete the form below before your first visit. This information
