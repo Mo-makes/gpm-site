@@ -37,7 +37,7 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
       {/* Detail */}
       <div className="p-5 flex flex-col flex-grow">
         {provider.isFounder && (
-          <p className="text-[0.66rem] uppercase tracking-[0.16em] text-brass mb-1.5">
+          <p className="text-[0.66rem] uppercase tracking-[0.16em] text-brass-ink mb-1.5">
             Founder
           </p>
         )}
@@ -58,6 +58,7 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
           <Link
             href={`/about/team/${provider.slug}`}
             className="btn btn-navy w-full text-[0.85rem] py-2.5"
+            aria-label={`View full profile of ${providerDisplayName(provider)}`}
           >
             View full profile
           </Link>

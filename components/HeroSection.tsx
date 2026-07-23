@@ -85,7 +85,7 @@ export default function HeroSection({
                   alt="Aerial view of the Global Pain Management office at 8031 Ritchie Highway, Pasadena, Maryland"
                   fill
                   priority
-                  unoptimized
+                  sizes="(max-width: 1024px) 100vw, 560px"
                   className="object-cover object-center"
                 />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 via-navy/55 to-transparent px-5 pb-4 pt-12">

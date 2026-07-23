@@ -26,7 +26,7 @@ export default function OfficeHoursCard() {
               <span className={isToday ? "text-ink font-semibold" : "text-body"}>
                 {day}
                 {isToday && (
-                  <span className="ml-2 text-[0.6rem] uppercase tracking-[0.14em] text-clay align-middle">
+                  <span className="ml-2 text-[0.6rem] uppercase tracking-[0.14em] text-clay-deep align-middle">
                     Today
                   </span>
                 )}

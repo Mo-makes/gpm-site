@@ -5,7 +5,7 @@ export default function StickyCallBar() {
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-clay border-t border-clay-deep shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.45)]">
       <a
         href={PHONE_HREF}
-        className="flex items-center justify-center gap-2.5 py-3.5 text-paper font-semibold text-[1.02rem] tracking-wide"
+        className="flex items-center justify-center gap-2.5 py-3.5 text-white font-semibold text-[1.02rem] tracking-wide"
         aria-label={`Call Global Pain Management at ${PHONE_DISPLAY}`}
       >
         <svg

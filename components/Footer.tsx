@@ -76,7 +76,7 @@ export default function Footer() {
                 >
                   {PHONE_DISPLAY}
                 </a>
-                <span className="text-paper/40"> · phone</span>
+                <span className="text-paper/60"> · phone</span>
               </p>
               <p className="text-paper/55 text-[0.875rem]">{FAX_DISPLAY} · fax</p>
               <p className="text-paper/55 text-[0.875rem]">
@@ -171,13 +171,13 @@ export default function Footer() {
               <p className="text-paper/70 text-[0.95rem]">
                 Monday – Friday · 8:30 AM – 4:30 PM
               </p>
-              <p className="text-paper/50 text-[0.875rem]">Saturday – Sunday · Closed</p>
+              <p className="text-paper/60 text-[0.875rem]">Saturday – Sunday · Closed</p>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 pt-6 border-t border-paper/12 flex flex-col sm:flex-row items-center justify-between gap-3 text-[0.8rem] text-paper/45">
+        <div className="mt-14 pt-6 border-t border-paper/12 flex flex-col sm:flex-row items-center justify-between gap-3 text-[0.8rem] text-paper/60">
           <p>
             © {new Date().getFullYear()} Global Pain Management. All rights reserved.
           </p>

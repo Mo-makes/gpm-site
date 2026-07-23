@@ -20,7 +20,7 @@
 
   /* ── Text ─────────────────────────────────────────────────────── */
   --color-body: #423d33; /* warm body text on paper */
-  --color-muted: #756d5d; /* secondary / captions */
+  --color-muted: #5c5445; /* secondary / captions — darkened for 4.5:1 on sand/paper */
 
   /* ── Accents ──────────────────────────────────────────────────── */
   --color-clay: #b15a32; /* primary warm accent / CTA */
@@ -29,7 +29,8 @@
   --color-sage: #6c7a59; /* estuary sage */
   --color-sage-deep: #515d42; /* sage text */
   --color-sage-soft: #e2e6d6; /* sage tint fill */
-  --color-brass: #a9802f; /* fine metallic detail */
+  --color-brass: #a9802f; /* fine metallic detail — dark backgrounds only */
+  --color-brass-ink: #7d5f22; /* brass family, darkened for 4.5:1 on light card backgrounds */
 
   /* ── Lines ────────────────────────────────────────────────────── */
   --color-line: #d8cdb8; /* hairline on paper */
@@ -191,7 +192,7 @@
 
 .btn-clay {
   background: var(--color-clay);
-  color: #fbf7ee;
+  color: #fff; /* pure white (not cream) — cream fails 4.5:1 on clay */
 }
 .btn-clay:hover {
   background: var(--color-clay-deep);

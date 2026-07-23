@@ -27,7 +27,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
           <p className="font-hanken text-[0.9rem] font-semibold text-ink">
             {testimonial.reviewerDisplay}
           </p>
-          <p className="text-[0.7rem] uppercase tracking-[0.13em] text-brass">
+          <p className="text-[0.7rem] uppercase tracking-[0.13em] text-brass-ink">
             Verified patient
           </p>
         </div>

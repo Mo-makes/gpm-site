@@ -88,10 +88,15 @@ export default function TestimonialCarousel({
               aria-selected={i === currentIndex}
               aria-label={`Go to testimonial ${i + 1}`}
               onClick={() => setCurrentIndex(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === currentIndex ? "w-6 bg-clay" : "w-2 bg-line-strong"
-              }`}
-            />
+              className="p-2 flex items-center justify-center"
+            >
+              <span
+                className={`h-2 rounded-full transition-all block ${
+                  i === currentIndex ? "w-6 bg-clay" : "w-2 bg-line-strong"
+                }`}
+                aria-hidden="true"
+              />
+            </button>
           ))}
         </div>
         <button
