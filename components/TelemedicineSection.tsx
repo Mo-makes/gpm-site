@@ -1,5 +1,7 @@
 import { providers, providerDisplayName } from "@/lib/data/providers";
 
+const telemedicineProviders = providers.filter((p) => p.telemedicineUrl);
+
 export default function TelemedicineSection() {
   return (
     <section className="bg-sand py-12 lg:py-24">
@@ -23,7 +25,7 @@ export default function TelemedicineSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {providers.map((provider) => (
+          {telemedicineProviders.map((provider) => (
             <div key={provider.slug} className="card p-7 flex flex-col items-start">
               <span
                 className="w-12 h-12 rounded-full bg-navy text-paper flex items-center justify-center font-fraunces text-xl mb-5"

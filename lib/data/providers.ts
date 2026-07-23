@@ -9,7 +9,7 @@ export interface Provider {
   bio: string[];
   specialties: string[];
   education?: string[];
-  telemedicineUrl: string;
+  telemedicineUrl?: string;
   imageAlt: string;
   /** Path relative to /public, e.g. "/images/haddio.webp" */
   imageSrc?: string;
@@ -94,6 +94,23 @@ export const providers: Provider[] = [
     imageAlt: "Shannon Wrobel, CRNP, Nurse Practitioner at Global Pain Management",
     imageSrc: "/images/shannonv.webp",
     imageObjectPosition: "center 22%",
+  },
+  {
+    slug: "janet-ascione-crnp",
+    name: "Janet Ascione",
+    credentials: "CRNP",
+    title: "Certified Registered Nurse Practitioner",
+    bio: [
+      "Janet Ascione, CRNP, is the newest provider to join Global Pain Management. She brings years of pain management experience to patients throughout Pasadena, Kent Island, Columbia, and the greater Anne Arundel County region.",
+      "Janet is committed to Global Pain Management's approach to care — listening first, treating the whole patient, and building a treatment plan around each patient's goals and life.",
+    ],
+    specialties: [
+      "Chronic pain management",
+      "Patient evaluation and treatment planning",
+      "Medication management",
+    ],
+    imageAlt: "Janet Ascione, CRNP, Nurse Practitioner at Global Pain Management",
+    imageSrc: "/images/janeta.webp",
   },
   // TODO: Nicole Small, CRNP — no longer with the practice as of the site rebuild.
   // If she returns or a replacement provider is added, create a new entry here.

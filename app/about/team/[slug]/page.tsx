@@ -115,14 +115,16 @@ export default async function ProviderPage({ params }: Props) {
                 </h1>
                 <p className="mt-2 text-paper/65 text-[0.95rem]">{provider.title}</p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <a
-                    href={provider.telemedicineUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-clay text-[0.85rem] px-5 py-2.5"
-                  >
-                    Join Telemedicine Visit
-                  </a>
+                  {provider.telemedicineUrl && (
+                    <a
+                      href={provider.telemedicineUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-clay text-[0.85rem] px-5 py-2.5"
+                    >
+                      Join Telemedicine Visit
+                    </a>
+                  )}
                   <Link href="/contact" className="btn btn-outline-light text-[0.85rem] px-5 py-2.5">
                     Request Appointment
                   </Link>
@@ -184,23 +186,25 @@ export default async function ProviderPage({ params }: Props) {
                   </ul>
                 </div>
 
-                <div className="bg-sage-soft border border-sage/25 rounded-[5px] p-6">
-                  <p className="font-fraunces text-lg text-sage-deep mb-2" style={{ fontWeight: 560 }}>
-                    Telemedicine available
-                  </p>
-                  <p className="text-body text-[0.9rem] mb-4 leading-relaxed">
-                    Established patients with a scheduled appointment can join a virtual
-                    visit with {provider.name.split(" ")[0]} using the link below.
-                  </p>
-                  <a
-                    href={provider.telemedicineUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-navy w-full text-[0.85rem] py-2.5"
-                  >
-                    Join Telemedicine Visit
-                  </a>
-                </div>
+                {provider.telemedicineUrl && (
+                  <div className="bg-sage-soft border border-sage/25 rounded-[5px] p-6">
+                    <p className="font-fraunces text-lg text-sage-deep mb-2" style={{ fontWeight: 560 }}>
+                      Telemedicine available
+                    </p>
+                    <p className="text-body text-[0.9rem] mb-4 leading-relaxed">
+                      Established patients with a scheduled appointment can join a virtual
+                      visit with {provider.name.split(" ")[0]} using the link below.
+                    </p>
+                    <a
+                      href={provider.telemedicineUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-navy w-full text-[0.85rem] py-2.5"
+                    >
+                      Join Telemedicine Visit
+                    </a>
+                  </div>
+                )}
 
                 <div className="bg-navy text-paper rounded-[5px] p-6">
                   <p className="font-fraunces text-lg text-paper mb-2" style={{ fontWeight: 560 }}>

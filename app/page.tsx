@@ -139,7 +139,7 @@ export default function HomePage() {
   const stats = [
     { value: "2013", label: "Year founded" },
     { value: `${years}`, label: "Years serving Maryland" },
-    { value: "3", label: "Dedicated providers" },
+    { value: "4", label: "Dedicated providers" },
     { value: "Thousands", label: "Patients treated" },
   ];
 

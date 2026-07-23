@@ -62,15 +62,17 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
           >
             View full profile
           </Link>
-          <a
-            href={provider.telemedicineUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-outline w-full text-[0.85rem] py-2.5"
-            aria-label={`Join telemedicine visit with ${providerDisplayName(provider)}`}
-          >
-            Telemedicine visit
-          </a>
+          {provider.telemedicineUrl && (
+            <a
+              href={provider.telemedicineUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline w-full text-[0.85rem] py-2.5"
+              aria-label={`Join telemedicine visit with ${providerDisplayName(provider)}`}
+            >
+              Telemedicine visit
+            </a>
+          )}
         </div>
       </div>
     </div>

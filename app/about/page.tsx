@@ -41,6 +41,10 @@ const milestones = [
     year: "2024",
     text: "Recognized as a Maryland Top Doctor practice. The team grows to three dedicated providers serving thousands of patients annually.",
   },
+  {
+    year: "2026",
+    text: "Janet Ascione, CRNP joins Global Pain Management, growing the team to four dedicated providers.",
+  },
 ];
 
 const values = [
