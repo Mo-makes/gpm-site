@@ -253,9 +253,9 @@ export default function HomePage() {
                 plan that fits your life.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
+            <div className="grid grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
               {providers.map((provider) => (
-                <ProviderCard key={provider.slug} provider={provider} />
+                <ProviderCard key={provider.slug} provider={provider} dense />
               ))}
             </div>
             <div className="mt-10">
